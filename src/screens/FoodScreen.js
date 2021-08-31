@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useRef} from 'react';
 import FoodCard from '../components/FoodCard';
 import SwipeableImage from '../components/SwipeableImage';
 import BottomButtons from '../components/BottomButtons';
@@ -7,11 +7,23 @@ import Swipes from '../components/Swipes';
 
 const FoodScreen = () => {
 
+    const swipesRef = useRef()
+
+    function handleLikePress(){
+        swipesRef.current.openLeft()
+
+    }
+
+    function handlePassPress(){
+        swipesRef.current.openRight()
+
+    }
+
     return(
         <View style={styles.container}>
             <View style={styles.swipes}>
-                <Swipes/>
-                <BottomButtons/>
+                <Swipes ref={swipesRef}/>
+                <BottomButtons handleLikePress={handleLikePress} handlePassPress={handlePassPress}/>
             </View>
             {/* <FoodCard/> */}
 
