@@ -1,10 +1,10 @@
 import React from 'react';
 import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
 
-export default Register = () => {
+export default BookmarkScreen = () => {
     return(
         <View style={styles.container}>
-            <Text>Register Screen</Text>
+            <Text>Bookmark Screen</Text>
         </View>
     );
 }

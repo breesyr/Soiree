@@ -1,13 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
+import Login from './src/screens/Login';
+import MainStackScreen from './stacks/MainStackScreen';
+import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import AppNavigator from './navigator/AppNavigator';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Ligma</Text>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+        <MainStackScreen></MainStackScreen>
+    </NavigationContainer>
   );
 }
 
