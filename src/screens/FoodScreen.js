@@ -1,9 +1,8 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React, {useRef} from 'react';
-import FoodCard from '../components/FoodCard';
-import SwipeableImage from '../components/SwipeableImage';
 import BottomButtons from '../components/BottomButtons';
 import Swipes from '../components/Swipes';
+import Container from '../components/Container';
 
 const FoodScreen = () => {
 
@@ -20,15 +19,15 @@ const FoodScreen = () => {
     }
 
     return(
+        <Container>
         <View style={styles.container}>
             <View style={styles.swipes}>
                 <Swipes ref={swipesRef}/>
                 <BottomButtons handleLikePress={handleLikePress} handlePassPress={handlePassPress}/>
             </View>
-            {/* <FoodCard/> */}
-
         </View>
-    )
+        </Container>
+        )
 
 }
 
@@ -36,9 +35,9 @@ const styles = StyleSheet.create({
 
     container: {
         flex : 1,
-        marginTop: 80,
-        paddingLeft: 70,
-        paddingRight: 70
+        marginTop: 100,
+        paddingLeft: 60,
+        paddingRight: 60
 
     },
 
