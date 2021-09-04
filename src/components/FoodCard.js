@@ -1,8 +1,9 @@
 import React, {useCallback}from 'react'
-import { View, Text, Image, StyleSheet, Animated } from 'react-native'
+import { View, Text, Image, StyleSheet, Animated, TouchableOpacity } from 'react-native'
 import { ACTION_OFFSET, FOODCARD } from '../utils/constants'
 import { LinearGradient } from 'expo-linear-gradient'
 import Choice from './Choice'
+import {Ionicons} from '@expo/vector-icons'
 
 export default function FoodCard({foodId, title, photo_url, stars, isFirst, swipe, tiltSign, ...rest}) {
 
@@ -50,8 +51,21 @@ export default function FoodCard({foodId, title, photo_url, stars, isFirst, swip
     return (
         <Animated.View style={[styles.container, isFirst && animatedCardStyle]} {...rest}>
             <Image source={{uri: photo_url}} style={styles.image}/>
-            <LinearGradient colors={['transparent', 'rgba(0,0,0,0.9)']} style={styles.gradient}/>
+            {/* <LinearGradient colors={['transparent', 'rgba(0,0,0,0.9)']} style={styles.gradient}/> */}
             <Text style={styles.title}>{title}</Text>
+            <TouchableOpacity style={styles.buttonContainer}>
+                <Text style={styles.buttonText}> Info</Text>
+                <Ionicons name="information-circle-outline" color={'white'} size={20} style={{marginLeft: 15}}/>
+            </TouchableOpacity>
+            <View style={styles.starRow} >
+                    <Ionicons name="star"   size={30} color={'yellow'} > </Ionicons>
+                    <Ionicons name="star"  size={30} color={'yellow'}> </Ionicons>
+                    <Ionicons name="star"  size={30} color={'yellow'}> </Ionicons>
+                    <Ionicons name="star" size={30} color={'yellow'}> </Ionicons>
+                    <Ionicons name="star" size={30} color={'white'}> </Ionicons>
+            </View>
+            <LinearGradient colors={['transparent', 'rgba(0,0,0,0.5)']} style={styles.gradient}/>
+
 
             {
                 isFirst && renderChoice()
@@ -74,8 +88,8 @@ const styles = StyleSheet.create({
     },
     title: {
         position: 'absolute',
-        bottom: 22,
-        left: 22,
+        bottom: 80,
+        left: 20,
         fontSize: 36,
         fontWeight: 'bold',
         color: '#fff'
@@ -89,6 +103,27 @@ const styles = StyleSheet.create({
         height: 160,
         borderRadius: FOODCARD.BORDER_RADIUS
 
+    },
+    buttonContainer: {
+        position: 'absolute',
+        flexDirection: 'row',
+        alignItems: 'center',
+        bottom: 60,
+        left: 20,
+    },
+    buttonText: {
+        fontWeight: 'bold',
+        color: '#fff',
+        fontSize: 20
+
+    }, 
+    starRow: {
+        position: 'absolute',
+        bottom: 30,
+        left: 20,
+
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     // choiceContainer:{
     //     position: 'absolute',
