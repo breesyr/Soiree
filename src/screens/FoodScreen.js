@@ -1,32 +1,106 @@
-import {View, Text, StyleSheet} from 'react-native';
-import React, {useRef} from 'react';
-import BottomButtons from '../components/BottomButtons';
-import Swipes from '../components/Swipes';
-import Container from '../components/Container';
+import {View, Text, StyleSheet, Animated, PanResponder} from 'react-native';
+import React, {useRef, useEffect, useState, useCallback} from 'react';
+// import Container from '../components/Container';
+import {foods as foodArray} from '../../Data'
+import FoodCard from '../components/FoodCard';
+import Footer from '../components/Footer';
+import { ACTION_OFFSET, FOODCARD } from '../utils/constants';
+
 
 const FoodScreen = () => {
+    const [food, setFoods] = useState(foodArray)
 
-    const swipesRef = useRef()
+    const swipe = useRef(new Animated.ValueXY()).current;
+    const tiltSign = useRef(new Animated.Value(1)).current; 
 
-    function handleLikePress(){
-        swipesRef.current.openLeft()
+    useEffect( () => {
+        if (!food.length){
+            setFoods(foodArray)
+        }
+    }, [food.length]);
 
-    }
+    const panResponder = PanResponder.create({
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderMove: (_, {dx,dy, y0}) => {
+            swipe.setValue({x: dx, y: dy});
+            tiltSign.setValue(y0 > FOODCARD.HEIGHT/2 ? 1: -1)
+        },
+        onPanResponderRelease: (_,{dx,dy}) => {
 
-    function handlePassPress(){
-        swipesRef.current.openRight()
+            const direction = Math.sign(dx);
+            const isActionActive = Math.abs(dx) > ACTION_OFFSET;
 
-    }
+            if (isActionActive){
+                Animated.timing(swipe, {
+                    duration: 200,
+                    toValue: {
+                        x: direction * FOODCARD.OUT_OF_SCREEN,
+                        y: dy,
+                    },
+                    useNativeDriver: true,
+                }).start(removeTopCard);
+
+            } else{
+
+                Animated.spring(swipe, {
+                    toValue: {
+                        x: 0,
+                        y: 0, 
+                    },
+                    useNativeDriver: true,
+                    friction: 5,
+                }).start();
+            }
+        },
+    });
+
+    const removeTopCard = useCallback( () => {
+        setFoods((prevState) => prevState.slice(1))
+        swipe.setValue({x: 0, y: 0})
+    }, [swipe]);
+
+    const handleChoice = useCallback((direction) => {
+        Animated.timing(swipe.x, {
+            toValue: direction * FOODCARD.OUT_OF_SCREEN,
+            duration: 400,
+            useNativeDriver: true,
+        }).start(removeTopCard);
+
+    }, [removeTopCard, swipe.x]);
+
+ 
+
 
     return(
-        <Container>
+        
         <View style={styles.container}>
-            <View style={styles.swipes}>
-                <Swipes ref={swipesRef}/>
-                <BottomButtons handleLikePress={handleLikePress} handlePassPress={handlePassPress}/>
-            </View>
+        {food.map( ({foodId, title, photo_url, stars }, index) => {
+            const isFirst = index === 0;
+            const dragHandlers = isFirst ? panResponder.panHandlers : {}; 
+
+            return <FoodCard 
+                key={foodId} 
+                title={title} 
+                photo_url={photo_url} 
+                stars={stars} 
+                isFirst={isFirst}
+                swipe={swipe}
+                tiltSign={tiltSign}
+                 {...dragHandlers}/>
+
+        }).reverse()}
+
+        <Footer handleChoice={handleChoice}/>
         </View>
-        </Container>
+
+        // <Container>
+        // <View style={styles.container}>
+        //     <View style={styles.swipes}>
+        //         <Swipes ref={swipesRef} />
+        //         <BottomButtons handleLikePress={handleLikePress} handlePassPress={handlePassPress}/>
+        //     </View>
+        // </View>
+        // </Container>
         )
 
 }
@@ -34,26 +108,15 @@ const FoodScreen = () => {
 const styles = StyleSheet.create({
 
     container: {
-        flex : 1,
-        marginTop: 100,
-        paddingLeft: 60,
-        paddingRight: 60
+        flex: 1,
+        backgroundColor: '#8A2BE2',
+        alignItems: 'center'
+        // flex : 1,
+        // marginTop: 100,
+        // paddingLeft: 60,
+        // paddingRight: 60
 
     },
-
-    swipes: {
-        flex: 1,
-        padding: 10,
-        paddingTop: 8,
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 3
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-        elevation: 7
-    }
 })
 
 export default FoodScreen;
