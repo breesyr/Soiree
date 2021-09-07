@@ -4,6 +4,7 @@ import { ACTION_OFFSET, FOODCARD } from '../utils/constants'
 import { LinearGradient } from 'expo-linear-gradient'
 import Choice from './Choice'
 import {Ionicons} from '@expo/vector-icons'
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler'
 
 export default function FoodCard({foodId, title, photo_url, stars, isFirst, swipe, tiltSign, ...rest}) {
 
@@ -30,6 +31,24 @@ export default function FoodCard({foodId, title, photo_url, stars, isFirst, swip
         transform: [...swipe.getTranslateTransform(), {rotate}]
     };
 
+    const renderStars = useCallback( () => {
+
+        let StarArray = []
+        for (let x = 1; x <= stars; x++){
+            StarArray.push(
+                <TouchableWithoutFeedback key={x}>
+                    <Star/>
+                </TouchableWithoutFeedback>
+            )
+        };
+
+        return(
+            <View>
+                <View style={styles.starRow}>{StarArray}</View>
+            </View>
+        )
+    })
+
     const renderChoice = useCallback( () => {
         return (
         <>
@@ -53,19 +72,23 @@ export default function FoodCard({foodId, title, photo_url, stars, isFirst, swip
             <Image source={{uri: photo_url}} style={styles.image}/>
             {/* <LinearGradient colors={['transparent', 'rgba(0,0,0,0.9)']} style={styles.gradient}/> */}
             <Text style={styles.title}>{title}</Text>
-            <TouchableOpacity style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.buttonContainer} >
                 <Text style={styles.buttonText}> Info</Text>
                 <Ionicons name="information-circle-outline" color={'white'} size={20} style={{marginLeft: 15}}/>
             </TouchableOpacity>
-            <View style={styles.starRow} >
+
+            {
+                renderStars()
+
+            }
+            {/* <View style={styles.starRow} >
                     <Ionicons name="star"   size={30} color={'yellow'} > </Ionicons>
                     <Ionicons name="star"  size={30} color={'yellow'}> </Ionicons>
                     <Ionicons name="star"  size={30} color={'yellow'}> </Ionicons>
                     <Ionicons name="star" size={30} color={'yellow'}> </Ionicons>
                     <Ionicons name="star" size={30} color={'white'}> </Ionicons>
-            </View>
+            </View> */}
             <LinearGradient colors={['transparent', 'rgba(0,0,0,0.5)']} style={styles.gradient}/>
-
 
             {
                 isFirst && renderChoice()
@@ -142,3 +165,11 @@ const styles = StyleSheet.create({
         transform: [{rotate: '30deg'}]
     }
 })
+
+
+class Star extends React.Component {
+
+    render(){
+        return <Ionicons name="star"   size={30} color={'yellow'} > </Ionicons>
+    }
+}
