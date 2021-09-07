@@ -31,23 +31,34 @@ export default function FoodCard({foodId, title, photo_url, stars, isFirst, swip
         transform: [...swipe.getTranslateTransform(), {rotate}]
     };
 
-    const renderStars = useCallback( () => {
+    // const renderStars = useCallback( () => {
 
-        let StarArray = []
-        for (let x = 1; x <= stars; x++){
-            StarArray.push(
-                <TouchableWithoutFeedback key={x}>
-                    <Star/>
-                </TouchableWithoutFeedback>
-            )
-        };
+    //     let StarArray = []
+    //     for (let x = 1; x <= stars; x++){
+    //         StarArray.push(
+    //             <TouchableWithoutFeedback key={x}>
+    //                 <FilledStar/>
+    //             </TouchableWithoutFeedback>
+    //         )
+    //     };
 
-        return(
-            <View>
-                <View style={styles.starRow}>{StarArray}</View>
-            </View>
-        )
-    })
+    //     let remaining = 5 - stars
+    //     for (let x = 1; x <= remaining; x++){
+    //         StarArray.push(
+    //         <TouchableWithoutFeedback key={x}> 
+    //             <EmptyStar/>
+    //         </TouchableWithoutFeedback>
+
+    //         )
+    //     };
+
+
+    //     return(
+    //         <View>
+    //             <View style={styles.starRow}>{StarArray}</View>
+    //         </View>
+    //     )
+    // })
 
     const renderChoice = useCallback( () => {
         return (
@@ -77,17 +88,17 @@ export default function FoodCard({foodId, title, photo_url, stars, isFirst, swip
                 <Ionicons name="information-circle-outline" color={'white'} size={20} style={{marginLeft: 15}}/>
             </TouchableOpacity>
 
-            {
+            {/* {
                 renderStars()
 
-            }
-            {/* <View style={styles.starRow} >
+            } */}
+            <View style={styles.starRow} >
                     <Ionicons name="star"   size={30} color={'yellow'} > </Ionicons>
                     <Ionicons name="star"  size={30} color={'yellow'}> </Ionicons>
                     <Ionicons name="star"  size={30} color={'yellow'}> </Ionicons>
                     <Ionicons name="star" size={30} color={'yellow'}> </Ionicons>
                     <Ionicons name="star" size={30} color={'white'}> </Ionicons>
-            </View> */}
+            </View>
             <LinearGradient colors={['transparent', 'rgba(0,0,0,0.5)']} style={styles.gradient}/>
 
             {
@@ -167,9 +178,15 @@ const styles = StyleSheet.create({
 })
 
 
-class Star extends React.Component {
+class FilledStar extends React.Component {
 
     render(){
         return <Ionicons name="star"   size={30} color={'yellow'} > </Ionicons>
+    }
+}
+
+class EmptyStar extends React.Component {
+    render(){
+        return <Ionicons name="star"   size={30} color={'white'} > </Ionicons>
     }
 }
