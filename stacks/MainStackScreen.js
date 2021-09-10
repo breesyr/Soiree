@@ -15,6 +15,7 @@ export default MainStackScreen = () => {
     };
 
     const screenOptions = ({route}) => ({
+        headerShown: false,
         tabBarIcon: ({focused}) => {
             let iconName = 'home';
 
