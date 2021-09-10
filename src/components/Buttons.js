@@ -33,13 +33,13 @@ export default function Buttons({name, size, color, onPress}) {
 
 const styles = StyleSheet.create({
     container:{
-        width: 70,
-        height: 70,
-        backgroundColor: '#8A2BE2',
+        //width: 50,
+        height: 50,
+        //backgroundColor: '#E1D5E7',
         elevation: 5,
-        borderRadius: 40,
+        //borderRadius: 40,
         justifyContent: 'center',
-        // alignItems: 'center'
+        alignItems: 'center'
 
     }
 
