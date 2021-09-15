@@ -3,17 +3,17 @@ import { View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import { FontAwesome } from '@expo/vector-icons';
 
 
-export default function BottomButtons({handleLikePress, handlePassPress}) {
+export default function BottomButtons() {
     return (
         <View style={styles.container}>
             <View/>
-            <TouchableOpacity style={styles.button} onPress={handlePassPress}>
+            <TouchableOpacity style={styles.button}>
                 <FontAwesome name="thumbs-down" size={30} color="#cc0000"> </FontAwesome>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
                 <FontAwesome name="comment" size={30} color="#7f7f7f"> </FontAwesome>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button} onPress={handleLikePress}>
+            <TouchableOpacity style={styles.button}>
                 <FontAwesome name="thumbs-up" size={30} color="#7fbf7f"> </FontAwesome>
             </TouchableOpacity>
             <View/>

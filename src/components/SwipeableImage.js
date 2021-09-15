@@ -9,7 +9,7 @@ export default function SwipeableImage() {
             <Image source={require("../../assets/food.jpeg")} style={styles.photo}/>
             <View style={styles.textContainer}>
                 <View style={styles.textRow}> 
-                    <Text style={styles.textPrimary}>Sushi</Text>
+                    <Text style={styles.textPrimary}>Restaurant</Text>
                 </View>
 
                 <View style={styles.textRow}>

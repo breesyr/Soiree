@@ -4,7 +4,7 @@ import Swipeable  from 'react-native-gesture-handler/Swipeable'
 import SwipeableImage from './SwipeableImage'
 import {RectButton} from 'react-native-gesture-handler'
 
-function Swipes({swipesRef}) {
+export default function Swipes() {
 
     const renderLeftActions = () => {
         return (
@@ -23,7 +23,6 @@ function Swipes({swipesRef}) {
     }
     return (
         <Swipeable
-        ref={swipesRef}
         friction={2}
         leftThreshold={40}
         rightThreshold={40}
@@ -41,5 +40,3 @@ const styles = StyleSheet.create({
         flex: 1
     }
 })
-
-export default React.forwardRef((props, ref) => <Swipes swipesRef={ref} {...props}></Swipes>)

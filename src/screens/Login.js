@@ -1,9 +1,38 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
 import { StyleSheet, Text, View, Image, TextInput, Button, Dimensions, TouchableWithoutFeedback, Keyboard,
-    KeyboardAvoidingView } from 'react-native';
+    KeyboardAvoidingView, TouchableOpacity } from 'react-native';
+
+import { FirebaseContext } from '../../context/FirebaseContext';
+import {UserContext} from '../../context/UserContext';
+
+export default Login = ({navigation}) => {
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const firebase = useContext(FirebaseContext);
+    const [_, setUser] = useContext(UserContext);
+
+    const signIn = async () => {
+
+        try {
+            await firebase.signIn(email, password);
+
+            const uid = firebase.getCurrentUser().uid;
+
+            const userInfo = await firebase.getUserInfo(uid);
+
+            setUser({
+                username: userInfo.username,
+                email: userInfo.email,
+                uid,
+                //profilePhotoUrl: userInfo.profilePhotoUrl,
+                isLoggedIn: true,
+            });
+        } catch (error) {
+            alert(error.message);
+        } 
+    };
 
 
-export default Login = () => {
     return(  
     <KeyboardAvoidingView
     behavior={Platform.OS === "ios" ? "padding" : "height"}
@@ -13,21 +42,26 @@ export default Login = () => {
         <View style ={styles.inner}>
             <Text style ={styles.titleText}>Soiree</Text>
             <TextInput
-            placeholder="username"
+            placeholder="email"
+            onChangeText={setEmail}
             style={styles.textBox}
             autoCapitalize = 'none'
+            value={email}
             />
             <TextInput
             placeholder="password"
+            onChangeText={setPassword}
             secureTextEntry={true}
             style={styles.textBox}
+            autoCapitalize = 'none'
+            value={password}
             />
-            <Button
-            title= 'Login'
-            />
-            <Button
-            title= 'Register'
-            />
+            <TouchableOpacity style = {styles.button}>
+                <Text >Login</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style = {styles.button2} onPress={() => navigation.navigate("Register")}>
+                <Text >Don't have an account? Click here to Register</Text>
+            </TouchableOpacity>
         </View>
     </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
@@ -57,6 +91,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     titleText: {
-        fontSize: 25,
-    }
+        fontSize: 32,
+    },
+    button: {
+        alignItems: 'center',
+        backgroundColor: '#dab4ed',
+        padding: 10,
+        height: 40,
+        width: 100,
+        borderWidth: 1,
+        
+    },
+    button2: {
+        alignItems: 'center',
+        //backgroundColor: '#E1D5E7',
+        padding: 10,
+        
+        
+    },
 });
