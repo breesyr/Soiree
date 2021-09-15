@@ -1,15 +1,25 @@
-import React, { useContext } from "react";
-import { createStackNavigator } from "@react-navigation/stack";
+// import React, { useContext } from "react";
+// import { createStackNavigator } from "@react-navigation/stack";
 
-import MainStackScreen from "./MainStackScreen";
+// import { UserContext } from "../context/UserContext";
 
+// import AuthStackScreens from "./AuthStackScreens";
+// import MainStackScreens from "./MainStackScreens";
+// import LoadingScreen from "../screens/LoadingScreen";
 
-export default AppStackScreen = () => {
-    const AppStack = createStackNavigator();
+// export default AppStackScreens = () => {
+//     const AppStack = createStackNavigator();
+//     const [user] = useContext(UserContext);
 
-    return (
-        <AppStack.Navigator screenOptions={{headerShown: false}}>
-            <AppStack.Screen name="Main" component={MainStackScreen} />
-        </AppStack.Navigator>
-    );
-};
+//     return (
+//         <AppStack.Navigator headerMode="none">
+//             {user.isLoggedIn === null ? ( //Loading screen
+//                 <AppStack.Screen name="Loading" component={LoadingScreen} />
+//             ) : user.isLoggedIn ? ( //If user is logged in
+//                 <AppStack.Screen name="Main" component={MainStackScreens} />
+//             ) : (// Else direct them to login/register pages
+//                 <AppStack.Screen name="Auth" component={AuthStackScreens} />
+//             )}
+//         </AppStack.Navigator>
+//     );
+// };

@@ -5,8 +5,6 @@ import FoodScreen from '../src/screens/FoodScreen';
 import ActivityScreen from '../src/screens/ActivityScreen';
 import PlacesScreen from '../src/screens/PlacesScreen';
 import BookmarkScreen from '../src/screens/BookmarkScreen';
-import { FontAwesome5 } from '@expo/vector-icons';
-
 
 export default MainStackScreen = () => {
     const MainStack = createBottomTabNavigator();
@@ -15,30 +13,29 @@ export default MainStackScreen = () => {
     };
 
     const screenOptions = ({route}) => ({
-        headerShown: false,
         tabBarIcon: ({focused}) => {
-            let iconName = 'home';
+            let iconName = 'ios-home';
 
             switch(route.name){
                 case 'Foods': 
-                iconName = "hamburger"
+                iconName = 'md-pizza'
                 break;
     
                 case 'Activities': 
-                iconName = 'running'
+                iconName = 'md-pizza'
                 break;
     
                 case 'Places': 
-                iconName = 'map-marked'
+                iconName = 'md-wine'
                 break;
     
                 case 'Bookmark': 
-                iconName = 'bookmark'
+                iconName = 'ios-bookmark'
                 break;
     
-                default: iconName = 'utensils'
+                default: iconName = 'md-pizza'
             }
-            return <FontAwesome5 name={iconName} size={24} />
+            return <Ionicons name={iconName} size={24} />
         }
     });
 
