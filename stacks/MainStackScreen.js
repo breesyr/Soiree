@@ -7,13 +7,17 @@ import PlacesScreen from '../src/screens/PlacesScreen';
 import BookmarkScreen from '../src/screens/BookmarkScreen';
 import { FontAwesome5 } from '@expo/vector-icons';
 
+
 export default MainStackScreen = () => {
     const MainStack = createBottomTabNavigator();
     const tabBarOptions = {
         showLabel: true,
+
     };
 
     const screenOptions = ({route}) => ({
+        headerTransparent: true,
+        headerShown: false,
         tabBarIcon: ({focused}) => {
             let iconName = 'home';
 
