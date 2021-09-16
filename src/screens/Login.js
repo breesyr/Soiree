@@ -56,7 +56,7 @@ export default Login = ({navigation}) => {
             autoCapitalize = 'none'
             value={password}
             />
-            <TouchableOpacity style = {styles.button}>
+            <TouchableOpacity style = {styles.button} onPress={signIn}>
                 <Text >Login</Text>
             </TouchableOpacity>
             <TouchableOpacity style = {styles.button2} onPress={() => navigation.navigate("Register")}>

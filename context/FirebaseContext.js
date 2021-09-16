@@ -53,6 +53,7 @@ const Firebase = {
         }
     },
     signIn: async (email, password) => {
+        console.log("Login worked");
         return firebase.auth().signInWithEmailAndPassword(email, password);
     },
 

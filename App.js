@@ -1,15 +1,21 @@
 import { StatusBar } from 'expo-status-bar';
 import Login from './src/screens/Login';
-import AppStackScreen from './stacks/AppStackScreen'
+import AuthStackScreen from './stacks/AuthStackScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { UserProvider } from './context/UserContext';
+import { FirebaseProvider } from './context/FirebaseContext';
 
 export default function App() {
   return (
-    <NavigationContainer>
-        <AppStackScreen></AppStackScreen>
-    </NavigationContainer>
+    <FirebaseProvider>
+      <UserProvider>
+        <NavigationContainer>
+            <AuthStackScreen></AuthStackScreen>
+        </NavigationContainer>
+      </UserProvider>
+    </FirebaseProvider>
   );
 }
 
