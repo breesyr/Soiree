@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import Login from './src/screens/Login';
 import AuthStackScreen from './stacks/AuthStackScreen';
+import AppStackScreen from './stacks/AppStackScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
@@ -12,7 +13,7 @@ export default function App() {
     <FirebaseProvider>
       <UserProvider>
         <NavigationContainer>
-            <AuthStackScreen></AuthStackScreen>
+            <AppStackScreen></AppStackScreen>
         </NavigationContainer>
       </UserProvider>
     </FirebaseProvider>
