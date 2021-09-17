@@ -82,7 +82,7 @@ export default function FoodCard({foodId, title, photo_url, stars, isFirst, swip
             <Image source={{uri: photo_url}} style={styles.image}/>
             {/* <LinearGradient colors={['transparent', 'rgba(0,0,0,0.9)']} style={styles.gradient}/> */}
             <Text style={styles.title}>{title}</Text>
-            <TouchableOpacity style={styles.buttonContainer} >
+            <TouchableOpacity style={styles.buttonContainer} onPress={ () => console.log("pressed")} >
                 <Text style={styles.buttonText}> Info</Text>
                 <Ionicons name="information-circle-outline" color={'white'} size={20} style={{marginLeft: 15}}/>
             </TouchableOpacity>
@@ -138,6 +138,7 @@ const styles = StyleSheet.create({
 
     },
     buttonContainer: {
+        zIndex: 1,
         position: 'absolute',
         flexDirection: 'row',
         alignItems: 'center',
@@ -145,7 +146,7 @@ const styles = StyleSheet.create({
         left: 20,
     },
     buttonText: {
-        fontWeight: 'bold',
+         fontWeight: 'bold',
         color: '#fff',
         fontSize: 20
 
