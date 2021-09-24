@@ -125,7 +125,9 @@ const styles = StyleSheet.create({
         left: 20,
         fontSize: 36,
         fontWeight: 'bold',
-        color: '#fff'
+        color: '#fff',
+        textShadowColor: 'black',
+        textShadowRadius: 20
 
     },
     gradient: {
