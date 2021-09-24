@@ -25,13 +25,31 @@ export const foods = [
 export const activities = [
     {
         activityId: 1,
+        title: 'Planet Granite',
+        photo_url:
+        'https://images.squarespace-cdn.com/content/v1/5f4596c47a3e0b7b0ced96b4/1604506340970-8R00W4WKLM8PZXSBDWX0/PG_2019_Event_Fountain-Valley_Member-Sneak-Peak_Kevin-Tu_3_SM-scaled.jpg',
+        stars: 4,
+    },
+    {
+        activityId: 2,
+        title: 'Golf n Stuff',
+        photo_url:
+        'https://live.staticflickr.com/68/199973588_191e6db9e0_b.jpg',
+        stars: 4,
+    }
+
+]
+
+export const place = [
+    {
+        placesId: 1,
         title: 'Knotts Berry Farm',
         photo_url:
         'https://images.complex.com/complex/images/c_fill,dpr_2.0,f_auto,q_auto,w_1400/fl_lossy,pg_1/h6ac5lhcjq6xahxh11rx/knotts-berry-farm?fimg-ssr',
         stars: 4,
     },
     {
-        activityId: 2,
+        placesId: 2,
         title: 'Disneyland',
         photo_url:
         'https://cdn1.parksmedia.wdprapps.disney.com/resize/mwImage/1/1600/900/75/dam/disneyland/attractions/disneyland/sleeping-beauty-castle-walkthrough/sleeping-beauty-castle-exterior-16x9.jpg?1593556896598',
