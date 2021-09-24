@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#8A2BE2',
+        backgroundColor: '#E1D5E7',
         alignItems: 'center'
         // flex : 1,
         // marginTop: 100,
