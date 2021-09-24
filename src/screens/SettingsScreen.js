@@ -4,7 +4,7 @@ import {StyleSheet, Text, View, Button, TextInput} from 'react-native';
 export default BookmarkScreen = () => {
     return(
         <View style={styles.container}>
-            <Text>Bookmark Screen</Text>
+            <Text>Settings Screen</Text>
         </View>
     );
 }
