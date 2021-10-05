@@ -13,8 +13,8 @@ export default function Footer({handleChoice}) {
             <View style={styles.comment}>
                 <Buttons name="comment" size={30}  color={COLORS.comment} />
             </View>
-            <View style={styles.nope}>
-                <Buttons name="thumbs-up" size={30} color={COLORS.like} onPress={() => handleChoice(1)}/>
+            <View style={styles.like}>
+                <Buttons name="thumbs-up" size={30} color={'#66CD00'} onPress={() => handleChoice(1)}/>
             </View>
         </View>
     )
@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
         borderColor: '#7f7f7f',
         borderWidth: 3,
     },
-    nope: {
+    like: {
         width: 60,
         height: 60,
         borderRadius: 40,
-        borderColor: '#00eda6',
+        borderColor: '#66CD00',
         borderWidth: 3,
     }
 })
