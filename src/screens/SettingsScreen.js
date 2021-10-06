@@ -3,6 +3,8 @@ import {StyleSheet, Text, View, Button, TextInput, TouchableOpacity, Image} from
 import { FirebaseContext } from '../../context/FirebaseContext';
 import  {UserContext} from '../../context/UserContext';
 import { useContext } from 'react';
+import {FontAwesome5} from '@expo/vector-icons'
+
 
 export default SettingsScreen = () => {
 
@@ -19,15 +21,29 @@ export default SettingsScreen = () => {
     };
     return(
         <View style={styles.container}>
-            <Image source={{uri: "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimg2.wikia.nocookie.net%2F__cb20120721171708%2Fspongebob%2Fimages%2Fc%2Fce%2FBoys_Who_Cray.PNG&f=1&nofb=1"}}
+            <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
             style={styles.image}/>
-            <TouchableOpacity><Text>Username</Text></TouchableOpacity>
-            <TouchableOpacity><Text>Email</Text></TouchableOpacity>
-            <TouchableOpacity><Text>Account</Text></TouchableOpacity>
-            <TouchableOpacity><Text>Notifications</Text></TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <FontAwesome5 name="user" size={30}/> 
+                <Text style={styles.buttonText}>Username</Text>
+                </TouchableOpacity>
+            <TouchableOpacity style={styles.button}>
+                <FontAwesome5 name="envelope" size={30}/>
+                <Text style={styles.buttonText}>Email</Text></TouchableOpacity>
+
+            <TouchableOpacity style={styles.button}>
+                <FontAwesome5 name="user-circle" size={30}/> 
+                <Text style={styles.buttonText}>Account</Text></TouchableOpacity>
+
+            <TouchableOpacity style={styles.button}>
+                <FontAwesome5 name="bell" size={30}/>
+                <Text style={styles.buttonText}>Notifications</Text></TouchableOpacity>
+
             <TouchableOpacity
-                onPress={onPress}>
-                <Text>Log out</Text></TouchableOpacity>
+                onPress={onPress}
+                style={styles.button}>
+                <FontAwesome5 name="door-open" size={30}/>
+                <Text style={styles.buttonText}>Log out</Text></TouchableOpacity>
         </View>
     );
 }
@@ -37,11 +53,23 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#E1D5E7',
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
     },
     image: {
-        top: 0,
-        borderRadius: 50
+        top: 25,
+        height: 200,
+        width: 200,
+        borderRadius: 100,
+        marginBottom: 50
+    },
+    button: {
+        flexDirection: 'row',
+        borderBottomWidth: 3,
+        borderBottomColor: 'black',
+        marginBottom: 5
+    },
+    buttonText: {
+        fontSize: 30
     }
 });
