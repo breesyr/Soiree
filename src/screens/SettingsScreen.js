@@ -23,13 +23,13 @@ export default SettingsScreen = () => {
         <View style={styles.container}>
             <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
             style={styles.image}/>
-            <TouchableOpacity style={styles.button}>
+            <View style={styles.button}>
                 <FontAwesome5 name="user" size={30}/> 
                 <Text style={styles.buttonText}>Username</Text>
-                </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
+                </View>
+            <View style={styles.button}>
                 <FontAwesome5 name="envelope" size={30}/>
-                <Text style={styles.buttonText}>Email</Text></TouchableOpacity>
+                <Text style={styles.buttonText}>Email</Text></View>
 
             <TouchableOpacity style={styles.button}>
                 <FontAwesome5 name="user-circle" size={30}/> 
