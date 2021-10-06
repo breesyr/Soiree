@@ -57,11 +57,18 @@ const Firebase = {
         return firebase.auth().signInWithEmailAndPassword(email, password);
     },
 
+    logOut: async () => {
 
+        try{
+            await firebase.auth().signOut(); 
+            return true;
 
-
-
-
+        }
+        catch (err) {
+            console.log(err);
+        }
+        return false; 
+    }
 
 
 
