@@ -111,7 +111,7 @@ export default function FoodCard({foodId, title, photo_url, stars, isFirst, swip
 const styles = StyleSheet.create({
     container: {
         position: 'absolute',
-        top: 85, 
+        top: 75, 
 
     },
     image: {
