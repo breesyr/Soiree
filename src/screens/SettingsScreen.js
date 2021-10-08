@@ -26,11 +26,14 @@ export default SettingsScreen = () => {
             style={styles.image}/>
             <View>
                 <Text style={styles.username}>Username</Text>
-                <Text>Edit Profile</Text>
+                <TouchableOpacity>
+                    <Text>Edit Profile</Text>
+                </TouchableOpacity>
             </View>
-            <View style={{ marginLeft: 'auto'}}> 
+
+            <TouchableOpacity style={{ marginLeft: 'auto'}}> 
             <FontAwesome5 name="arrow-right" size={20} />
-            </View>
+            </TouchableOpacity>
 
             </View>
 
