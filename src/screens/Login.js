@@ -49,6 +49,7 @@ export default Login = ({navigation}) => {
             value={email}
             />
             <TextInput
+            secureTextEntry={true}
             placeholder="password"
             onChangeText={setPassword}
             secureTextEntry={true}

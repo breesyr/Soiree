@@ -35,17 +35,17 @@ export default Register = ({navigation}) => {
                 Soiree
             </Text>
             <View style = {{flexDirection: 'row'}}>
-            <TextInput
-                placeholder = "first name"
-                style = {styles.nameBox}
-                onChangeText={(firstName) => setFirstName(firstName.trim())}
+                <TextInput
+                    placeholder = "first name"
+                    style = {styles.nameBox}
+                    onChangeText={(firstName) => setFirstName(firstName.trim())}
 
-            />
-            <TextInput
-                placeholder = "last name"
-                style = {styles.nameBox}
-                onChangeText={(lastName) => setLastName(lastName.trim())}
-            />
+                />
+                <TextInput
+                    placeholder = "last name"
+                    style = {styles.nameBox}
+                    onChangeText={(lastName) => setLastName(lastName.trim())}
+                />
             </View>
             <TextInput
                 placeholder = "username"
@@ -58,6 +58,7 @@ export default Register = ({navigation}) => {
                 onChangeText={(email) => setEmail(email.trim())}
             />
             <TextInput
+                secureTextEntry={true}
                 placeholder = "passsword"
                 style = {styles.loginBox}
                 onChangeText={(password) => setPassword(password.trim())}
