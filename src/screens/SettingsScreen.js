@@ -12,6 +12,8 @@ export default SettingsScreen = () => {
 
     const [user, setUser] = useState([]); 
     const firebase = useContext(FirebaseContext);
+
+    const [loggedUser, setLoggedUser] = useContext(UserContext);
     
     const [isEnabled, setIsEnabled] = useState(false);
     const [isPushed, setIsPushed] = useState(false);
@@ -29,12 +31,13 @@ export default SettingsScreen = () => {
     
                 const uid = firebase.getCurrentUser().uid;
                 const userInfo = await firebase.getUserInfo(uid);    
-                
                 setUser(userInfo);
+
+                console.log(user)
             }
     
             catch(err){
-                console.log('no worky')
+                console.log('no worky', err.message)
             }
     
         }
@@ -46,10 +49,11 @@ export default SettingsScreen = () => {
             const logOut = await firebase.logOut();
 
             if (logOut){
-                setUser((state) => ({...state, isLoggedIn : false})); 
+                setLoggedUser((state) => ({...state, isLoggedIn : false})); 
 
             }
     };
+
     return(
         <View style={styles.container}>
             <View style={styles.innerContainer}>
