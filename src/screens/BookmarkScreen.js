@@ -50,7 +50,7 @@ const Item = ({title, picture,address}) => (
             >
             </Image>
             <View style = {{flexDirection: 'column', flexShrink: 1,}}>
-                <View style = {{flex: 1, marginBottom: -50}}>
+                <View style = {{flex: 1, marginBottom: 1}}>
                     <Text style = {styles.title}>{title} </Text>
                 </View>    
 
