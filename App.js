@@ -7,16 +7,19 @@ import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { UserProvider } from './context/UserContext';
 import { FirebaseProvider } from './context/FirebaseContext';
+import Maps from './src/screens/Maps'
 
 export default function App() {
   return (
-    <FirebaseProvider>
-      <UserProvider>
-        <NavigationContainer>
-            <AppStackScreen></AppStackScreen>
-        </NavigationContainer>
-      </UserProvider>
-    </FirebaseProvider>
+    // <FirebaseProvider>
+    //   <UserProvider>
+    //     <NavigationContainer>
+    //         <AppStackScreen></AppStackScreen>
+    //     </NavigationContainer>
+    //   </UserProvider>
+    // </FirebaseProvider>
+
+    <Maps />
   );
 }
 
