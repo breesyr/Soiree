@@ -110,7 +110,8 @@ const styles = StyleSheet.create({
     title:{
         fontSize: 20,
         paddingLeft: 0,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+    
         
     },
     address:{
