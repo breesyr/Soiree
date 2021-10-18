@@ -1,23 +1,57 @@
 import {View, Text, StyleSheet, Animated, PanResponder} from 'react-native';
 import React, {useRef, useEffect, useState, useCallback} from 'react';
-// import Container from '../components/Container';
-import {foods as foodArray} from '../../Data'
 import FoodCard from '../components/FoodCard';
 import Footer from '../components/Footer';
 import { ACTION_OFFSET, FOODCARD } from '../utils/constants';
+import {API_BASE_URL, BEARER_TOKEN} from '../../yelp_api/config';
 
 
 const FoodScreen = () => {
-    const [food, setFoods] = useState(foodArray)
-
+    const [food, setFoods] = useState([]);
+    
     const swipe = useRef(new Animated.ValueXY()).current;
     const tiltSign = useRef(new Animated.Value(1)).current; 
 
     useEffect( () => {
+        getBusiness();
+        
         if (!food.length){
-            setFoods(foodArray)
+            setFoods(food);
         }
+        
+        
     }, [food.length]);
+
+    const getBusiness = async () => {
+        try{
+            // Categories can be 'bars', 'restaurants', 'food'
+            // Location can be 'NYC', 'CA'
+            // Limit displays how many businesses you want to fetch
+            const res = fetch(`${API_BASE_URL}` +
+            'categories=restaurants' +
+            '&location=NYC' +
+            '&limit=5', {
+                method: "GET",
+                headers: {
+                    "accept": "application/json",
+                    Authorization: `Bearer ${BEARER_TOKEN}`,
+                }
+            })
+            const data = (await res).json()
+            data.then(jsonResponse => {
+                setFoods(
+                    jsonResponse.businesses.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        image_url: item.image_url,
+                        rating: item.rating,
+                    }))
+                )
+            })
+        } catch (err) {
+            console.log('error: ' , err)
+        }
+    }
 
     const panResponder = PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -72,17 +106,16 @@ const FoodScreen = () => {
 
 
     return(
-        
         <View style={styles.container}>
-        {food.map( ({foodId, title, photo_url, stars }, index) => {
+        {food.map( ({id, name, image_url, rating }, index) => {
             const isFirst = index === 0;
             const dragHandlers = isFirst ? panResponder.panHandlers : {}; 
 
             return <FoodCard 
-                key={foodId} 
-                title={title} 
-                photo_url={photo_url} 
-                stars={stars} 
+                key={id} 
+                title={name} 
+                photo_url={image_url} 
+                stars={rating} 
                 isFirst={isFirst}
                 swipe={swipe}
                 tiltSign={tiltSign}
