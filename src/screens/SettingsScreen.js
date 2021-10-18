@@ -8,7 +8,7 @@ import {FontAwesome5} from '@expo/vector-icons'
 
 
 
-export default SettingsScreen = () => {
+export default SettingsScreen = ({navigation}) => {
 
     const [user, setUser] = useState([]); 
     const firebase = useContext(FirebaseContext);
@@ -57,19 +57,17 @@ export default SettingsScreen = () => {
     return(
         <View style={styles.container}>
             <View style={styles.innerContainer}>
-            <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
-            style={styles.image}/>
-            <View>
-                {/* <Text style={styles.username}>Patrick's Settings</Text> */}
-                <Text style={styles.username}>{user?.username}'s Settings</Text>
-                {/* <Text style={styles.username, {fontSize: 12}}>Email</Text>
-                <Text style={styles.email}>{user?.email}</Text>
-                <TouchableOpacity>
-                    <Text>View Profile</Text>
-                </TouchableOpacity> */}
-            </View>
-
-
+                <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
+                style={styles.image}/>
+                <View>
+                    {/* <Text style={styles.username}>Patrick's Settings</Text> */}
+                    <Text style={styles.username}>{user?.username}'s Settings</Text>
+                    {/* <Text style={styles.username, {fontSize: 12}}>Email</Text>
+                    <Text style={styles.email}>{user?.email}</Text>
+                    <TouchableOpacity>
+                        <Text>View Profile</Text>
+                    </TouchableOpacity> */}
+                </View>
             </View>
 
             
@@ -83,140 +81,137 @@ export default SettingsScreen = () => {
             <View style={{flex: 1}}>
                 <ScrollView scrollEnabled={true}> 
 
-            <View style={{marginBottom: 10}}>
-                <Text style={{color: '#808080'}}>ACCOUNT</Text>
-            </View>
+                    <View style={{marginBottom: 10}}>
+                        <Text style={{color: '#808080'}}>ACCOUNT</Text>
+                    </View>
 
 
-            <View style={styles.accountDisplay} >
+                    <View style={styles.accountDisplay} >
 
-            <View style={styles.accountTextField}>
-                <View >
-                    <Text style={{fontWeight: 'bold'}}>First Name: </Text>
-                </View>
+                        <View style={styles.accountTextField}>
+                            <View >
+                                <Text style={{fontWeight: 'bold'}}>First Name: </Text>
+                            </View>
 
-                <View >
-                    <Text style={{fontStyle: 'italic'}}>{user?.firstName}</Text>
-                </View>
-            </View>
+                            <View >
+                                <Text style={{fontStyle: 'italic'}}>{user?.firstName}</Text>
+                            </View>
+                        </View>
 
-            <View style={styles.accountTextField}>
-                <View>
-                    <Text style={{fontWeight: 'bold'}}>Last Name: </Text>
-                </View>
+                        <View style={styles.accountTextField}>
+                            <View>
+                                <Text style={{fontWeight: 'bold'}}>Last Name: </Text>
+                            </View>
 
-                <View>
-                    <Text style={{fontStyle: 'italic'}}>{user?.lastName} </Text>
-                </View>
-            </View>
+                            <View>
+                                <Text style={{fontStyle: 'italic'}}>{user?.lastName} </Text>
+                            </View>
+                        </View>
 
-            <View style={styles.accountTextField}>
-                <View>
-                    <Text style={{fontWeight: 'bold'}}>Email: </Text>
-                </View>
+                        <View style={styles.accountTextField}>
+                            <View>
+                                <Text style={{fontWeight: 'bold'}}>Email: </Text>
+                            </View>
 
-                <View>
-                    <Text style={{fontStyle: 'italic'}}>{user?.email}</Text>
-                </View>
-            </View>
+                            <View>
+                                <Text style={{fontStyle: 'italic'}}>{user?.email}</Text>
+                            </View>
+                        </View>
 
-            </View> 
+                    </View> 
 
-            <TouchableOpacity style={styles.button}>
-                <FontAwesome5 name="user-circle" size={20} style={{marginRight: 10}} color="#7961c2"/> 
-                <Text style={styles.buttonText}>Edit Account</Text>
-                <View style={{ marginLeft: 'auto'}}> 
-                <FontAwesome5 name="arrow-right" size={20} />
-                </View>
-            </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Account")}>
+                        <FontAwesome5 name="user-circle" size={20} style={{marginRight: 10}} color="#7961c2"/> 
+                        <Text style={styles.buttonText}>Edit Account</Text>
+                        <View style={{ marginLeft: 'auto'}}> 
+                            <FontAwesome5 name="arrow-right" size={20} />
+                        </View>
+                    </TouchableOpacity>
 
-            <View style={{marginBottom: 10}}>
-                <Text style={{color: '#808080'}}>PREFERENCES</Text>
-            </View>
+                    <View style={{marginBottom: 10}}>
+                        <Text style={{color: '#808080'}}>PREFERENCES</Text>
+                    </View>
 
-            <TouchableOpacity style={styles.button}>
-                <FontAwesome5 name="apple-alt" size={20} style={{marginRight: 10}} color="#7961c2"/> 
-                <Text style={styles.buttonText}>View preferences</Text>
-                <View style={{ marginLeft: 'auto'}}> 
-                <FontAwesome5 name="arrow-right" size={20} />
-                </View>
-            </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <FontAwesome5 name="apple-alt" size={20} style={{marginRight: 10}} color="#7961c2"/> 
+                        <Text style={styles.buttonText}>View preferences</Text>
+                        <View style={{ marginLeft: 'auto'}}> 
+                            <FontAwesome5 name="arrow-right" size={20} />
+                        </View>
+                    </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
-                <FontAwesome5 name="cookie-bite" size={20} style={{marginRight: 10}} color="#7961c2"/> 
-                <Text style={styles.buttonText}>Edit preferences</Text>
-                <View style={{ marginLeft: 'auto'}}> 
-                <FontAwesome5 name="arrow-right" size={20} />
-                </View>
-            </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <FontAwesome5 name="cookie-bite" size={20} style={{marginRight: 10}} color="#7961c2"/> 
+                        <Text style={styles.buttonText}>Edit preferences</Text>
+                        <View style={{ marginLeft: 'auto'}}> 
+                            <FontAwesome5 name="arrow-right" size={20} />
+                        </View>
+                    </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button}>
-                <FontAwesome5 name="utensils" size={20} style={{marginRight: 10}} color="#7961c2"/> 
-                <Text style={styles.buttonText}>Reset preferences</Text>
-                <View style={{ marginLeft: 'auto'}}> 
-                <FontAwesome5 name="arrow-right" size={20} />
-                </View>
-            </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <FontAwesome5 name="utensils" size={20} style={{marginRight: 10}} color="#7961c2"/> 
+                        <Text style={styles.buttonText}>Reset preferences</Text>
+                        <View style={{ marginLeft: 'auto'}}> 
+                            <FontAwesome5 name="arrow-right" size={20} />
+                        </View>
+                    </TouchableOpacity>
 
-            <View style={{marginBottom: 10}}>
-                <Text style={{color: '#808080'}}>NOTIFICATIONS</Text>
-            </View>
-            
-            <View style={styles.button}>
-                <Text style={styles.buttonText}>Push notifications</Text>
-                <View style={{marginLeft: 'auto'}}>
-                    <Switch 
-                    onValueChange={toggleSwitch1}
-                    value={isPushed} /> 
-                </View>
+                    <View style={{marginBottom: 10}}>
+                        <Text style={{color: '#808080'}}>NOTIFICATIONS</Text>
+                    </View>
+                    
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>Push notifications</Text>
+                        <View style={{marginLeft: 'auto'}}>
+                            <Switch 
+                            onValueChange={toggleSwitch1}
+                            value={isPushed} /> 
+                        </View>
 
-            </View>
+                    </View>
 
-            <View style={styles.button}>
-                <Text style={styles.buttonText}>Email notifications</Text>
-                <View style={{marginLeft: 'auto'}}>
-                    <Switch
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}  /> 
-                </View>
+                    <View style={styles.button}>
+                        <Text style={styles.buttonText}>Email notifications</Text>
+                        <View style={{marginLeft: 'auto'}}>
+                            <Switch
+                            onValueChange={toggleSwitch}
+                            value={isEnabled}  /> 
+                        </View>
 
-            </View>
+                    </View>
 
-            <View style={{marginBottom: 10}}>
-                <Text style={{color: '#808080'}}>LOCATION SERVICES</Text>
-            </View>
+                    <View style={{marginBottom: 10}}>
+                        <Text style={{color: '#808080'}}>LOCATION SERVICES</Text>
+                    </View>
 
-            <View style={styles.button}>
-                <FontAwesome5 name="location-arrow" size={18} style={{marginRight: 10}}  color="#7961c2"/>
-                <Text style={styles.buttonText}>Turn on location</Text>
-                <View style={{ marginLeft: 'auto'}}> 
-                <Switch
-                onValueChange={toggleSwitch2}
-                value={isLocated} />
-                {/* <FontAwesome5 name="arrow-right" size={30} /> */}
-                </View>
-                </View>
+                    <View style={styles.button}>
+                        <FontAwesome5 name="location-arrow" size={18} style={{marginRight: 10}}  color="#7961c2"/>
+                        <Text style={styles.buttonText}>Turn on location</Text>
+                        <View style={{ marginLeft: 'auto'}}> 
+                            <Switch
+                            onValueChange={toggleSwitch2}
+                            value={isLocated} />
+                            {/* <FontAwesome5 name="arrow-right" size={30} /> */}
+                        </View>
+                    </View>
 
-            <TouchableOpacity style={styles.button}>
-                <FontAwesome5 name="user-shield" size={20} style={{marginRight: 10}}  color="#7961c2"/>
-                <Text style={styles.buttonText}>Security</Text>
-                <View style={{ marginLeft: 'auto'}}> 
-                <FontAwesome5 name="arrow-right" size={20} />
-                </View>
-                </TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
+                        <FontAwesome5 name="user-shield" size={20} style={{marginRight: 10}}  color="#7961c2"/>
+                        <Text style={styles.buttonText}>Security</Text>
+                        <View style={{ marginLeft: 'auto'}}> 
+                            <FontAwesome5 name="arrow-right" size={20} />
+                        </View>
+                    </TouchableOpacity>
 
-            <TouchableOpacity
-                onPress={onPress}
-                style={styles.button}>
-                <FontAwesome5 name="door-open" size={20} style={{marginRight: 10}}  color="#7961c2"/>
-                <Text style={styles.buttonText}>Log out</Text>
-                <View style={{ marginLeft: 'auto'}}> 
-                <FontAwesome5 name="arrow-right" size={20} />
-                </View>
-            </TouchableOpacity>
-
-
-
+                    <TouchableOpacity
+                        onPress={onPress}
+                        style={styles.button}>
+                        <FontAwesome5 name="door-open" size={20} style={{marginRight: 10}}  color="#7961c2"/>
+                        <Text style={styles.buttonText}>Log out</Text>
+                        <View style={{ marginLeft: 'auto'}}> 
+                            <FontAwesome5 name="arrow-right" size={20} />
+                        </View>
+                    </TouchableOpacity>
                 </ScrollView>
             </View>
 

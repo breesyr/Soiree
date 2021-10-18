@@ -6,7 +6,7 @@ import ActivityScreen from '../src/screens/ActivityScreen';
 import PlacesScreen from '../src/screens/PlacesScreen';
 import BookmarkScreen from '../src/screens/BookmarkScreen';
 import { FontAwesome5 } from '@expo/vector-icons';
-import SettingsScreen from '../src/screens/SettingsScreen';
+import SettingStackScreen from './SettingStackScreen';
 
 
 export default MainStackScreen = () => {
@@ -55,7 +55,7 @@ export default MainStackScreen = () => {
             <MainStack.Screen name="Activities" component={ActivityScreen} ></MainStack.Screen>
             <MainStack.Screen name="Places" component={PlacesScreen} ></MainStack.Screen>
             <MainStack.Screen name="Bookmark" component={BookmarkScreen} ></MainStack.Screen>
-            <MainStack.Screen name="Settings" component={SettingsScreen} ></MainStack.Screen>
+            <MainStack.Screen name="Settings" component={SettingStackScreen} ></MainStack.Screen>
         </MainStack.Navigator>
     );
 }

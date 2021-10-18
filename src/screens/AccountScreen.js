@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, TextInput, Image} from 'react-native';
 import {FontAwesome5} from '@expo/vector-icons'
 
-export default AccountScreen = () => {
+export default AccountScreen = ({navigation}) => {
 
     const [fname, onChangeFname] = React.useState("first name");
     const [lname, onChangeLname] = React.useState("last name");
@@ -14,7 +14,7 @@ export default AccountScreen = () => {
     return(
         <View style={styles.container}>
             <Text style={{height: '6.5%'}}></Text>
-            <TouchableOpacity style={{alignSelf: 'flex-start', paddingLeft: 20}}> 
+            <TouchableOpacity style={{alignSelf: 'flex-start', paddingLeft: 20}} onPress={() => navigation.navigate("Settings")}> 
                 <FontAwesome5 name="arrow-left" size={20} style={{color: '#7961c2'}}/>
             </TouchableOpacity>
             <Image 
