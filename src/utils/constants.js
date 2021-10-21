@@ -10,6 +10,12 @@ export const FOODCARD = {
     OUT_OF_SCREEN: width + 0.5 * width,
 }; 
 
+export const INFOBOX = {
+    WIDTH: width * 0.9,
+    HEIGHT: height * 0.4,
+    BORDER_RADIUS: 15
+}
+
 
 export const COLORS = {
     like: '#00eda6',
