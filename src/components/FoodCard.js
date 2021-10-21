@@ -1,11 +1,15 @@
-import React, {useCallback}from 'react'
-import { View, Text, Image, StyleSheet, Animated, TouchableOpacity } from 'react-native'
-import { ACTION_OFFSET, FOODCARD } from '../utils/constants'
+import React, {useCallback, useState}from 'react'
+import { View, Text, Image, StyleSheet, Animated, TouchableOpacity, Modal } from 'react-native'
+import { ACTION_OFFSET, FOODCARD} from '../utils/constants'
 import { LinearGradient } from 'expo-linear-gradient'
 import Choice from './Choice'
 import {Ionicons} from '@expo/vector-icons'
+import InfoBox from './InfoBox'
+import {FontAwesome5} from '@expo/vector-icons'
+
 
 export default function FoodCard({foodId, title, photo_url, stars, isFirst, swipe, tiltSign, ...rest}) {
+    const [InfoModalOpen, setInfoModalOpen] = useState(false); 
 
     
     const rotate= Animated.multiply(swipe.x, tiltSign).interpolate({
@@ -79,10 +83,27 @@ export default function FoodCard({foodId, title, photo_url, stars, isFirst, swip
 
     return (
         <Animated.View style={[styles.container, isFirst && animatedCardStyle]} {...rest}>
+            <Modal visible={InfoModalOpen} animationType="slide" > 
+                <View style={{backgroundColor: '#E1D5E7', flex: 1}} >
+                    <View style={{marginTop: 50, flexDirection: 'row'}}>
+                        <TouchableOpacity onPress={() => setInfoModalOpen(false)}>
+
+                        <FontAwesome5 name="minus-square" 
+                        size={34} 
+                        color="#7961c2"/>
+
+                        </TouchableOpacity>
+                        <View style={{marginLeft: 10}}>
+                            <Text style={{fontStyle: 'italic', fontSize: 20}}>close</Text>
+                        </View>
+                    </View>
+                    <InfoBox/>
+                </View>
+            </Modal>
             <Image source={{uri: photo_url}} style={styles.image}/>
             {/* <LinearGradient colors={['transparent', 'rgba(0,0,0,0.9)']} style={styles.gradient}/> */}
             <Text style={styles.title}>{title}</Text>
-            <TouchableOpacity style={styles.buttonContainer} onPress={ () => console.log("pressed")} >
+            <TouchableOpacity style={styles.buttonContainer} onPress={ () => setInfoModalOpen(true)} >
                 <Text style={styles.buttonText}> Info</Text>
                 <Ionicons name="information-circle-outline" color={'white'} size={20} style={{marginLeft: 15}}/>
             </TouchableOpacity>
@@ -122,8 +143,9 @@ const styles = StyleSheet.create({
     title: {
         position: 'absolute',
         bottom: 80,
-        left: 20,
-        fontSize: 36,
+        marginLeft: 'auto',
+        // left: 20,
+        fontSize: 30,
         fontWeight: 'bold',
         color: '#fff',
         textShadowColor: 'black',
@@ -145,7 +167,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         bottom: 60,
-        left: 20,
+        // left: 20,
+        marginLeft: 'auto'
     },
     buttonText: {
          fontWeight: 'bold',
@@ -156,7 +179,8 @@ const styles = StyleSheet.create({
     starRow: {
         position: 'absolute',
         bottom: 30,
-        left: 20,
+        // left: 20,
+        marginLeft: 'auto',
 
         flexDirection: 'row',
         alignItems: 'center',
