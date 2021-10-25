@@ -4,6 +4,7 @@ import Buttons from './Buttons'
 import { COLORS } from '../utils/constants'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {FontAwesome5} from '@expo/vector-icons'
+import ReviewBox from './ReviewBox'
 
 
 export default function Footer({handleChoice}) {
@@ -29,13 +30,8 @@ export default function Footer({handleChoice}) {
                             <View style={{marginLeft: 10}}>
                                 <Text style={{fontStyle: 'italic', fontSize: 20}}>close</Text>
                             </View>
+                            <ReviewBox/>
                     </View>
-
-                    <View style={{padding: 15, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontWeight: 'bold', fontSize: 30}}>Write a Review</Text>
-                    </View>
-
-
 
                 </View> 
 
