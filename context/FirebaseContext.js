@@ -52,8 +52,32 @@ const Firebase = {
             console.log("Error @getUserInfo: ", error);
         }
     },
+
+    setUserInfo: async (user) => {
+        try{
+            const uid = Firebase.getCurrentUser().uid;
+
+            await db.collection("users").doc(uid).set({
+                firstName: user.fname,
+                lastName: user.lname,
+                displayName: user.username,
+                username: user.username,
+                email: user.email,
+                password: user.password,
+                //profilePhotoUrl,
+                //photoUrl: user.profilePhoto
+            });
+            
+            return { ...user, uid };
+        }
+        catch(error) {
+            console.log("Error @setUserInfo: ", error);
+        }
+
+    },
+
     signIn: async (email, password) => {
-        console.log("Login worked");
+        //console.log("Login worked");
         return firebase.auth().signInWithEmailAndPassword(email, password);
     },
 

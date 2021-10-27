@@ -33,7 +33,7 @@ export default SettingsScreen = ({navigation}) => {
                 const userInfo = await firebase.getUserInfo(uid);    
                 setUser(userInfo);
 
-                console.log(user)
+                console.log('Settings\n', userInfo)
             }
     
             catch(err){

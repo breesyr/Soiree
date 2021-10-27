@@ -20,7 +20,7 @@ const FoodScreen = () => {
         }
         
         
-    }, [food.length]);
+    }, []);
 
     const getBusiness = async () => {
         try{
@@ -29,7 +29,7 @@ const FoodScreen = () => {
             // Limit displays how many businesses you want to fetch
             const res = fetch(`${API_BASE_URL}` +
             'categories=restaurants' +
-            '&location=NYC' +
+            '&location=WA' +
             '&limit=5', {
                 method: "GET",
                 headers: {

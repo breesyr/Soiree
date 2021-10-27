@@ -10,7 +10,7 @@ export default AuthStackScreens = () => {
     const AuthStack = createStackNavigator();
 
     return (
-        <AuthStack.Navigator headerMode="none">
+        <AuthStack.Navigator  screenOptions={{ headerShown: false }}>
             <AuthStack.Screen name="Login" component={Login} />
             <AuthStack.Screen name="Register" component={Register} />
         </AuthStack.Navigator>

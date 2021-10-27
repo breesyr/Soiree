@@ -1,15 +1,69 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, TextInput, Image} from 'react-native';
+import { FirebaseContext } from '../../context/FirebaseContext';
+import  {UserContext} from '../../context/UserContext';
+import { useContext } from 'react';
 import {FontAwesome5} from '@expo/vector-icons'
 
 export default AccountScreen = ({navigation}) => {
 
-    const [fname, onChangeFname] = React.useState("first name");
-    const [lname, onChangeLname] = React.useState("last name");
-    const [username, onChangeUsername] = React.useState("username");
-    const [email, onChangeEmail] = React.useState("email");
-    const [password, onChangePassword] = React.useState();
+    const firebase = useContext(FirebaseContext);
+
+    const [fname, setFname] = useState();
+    const [lname, setLname] = useState();
+    const [username, setUsername] = useState();
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
     var verify = false;
+    const [hidepass, setHidepass] = useState();
+
+    useEffect(() =>{
+
+        const getUser = async () => {
+            try{
+    
+                const uid = firebase.getCurrentUser().uid;
+                const userInfo = await firebase.getUserInfo(uid);    
+                setFname(userInfo.firstName);
+                setLname(userInfo.lastName);
+                setUsername(userInfo.username);
+                setEmail(userInfo.email);
+                setPassword(userInfo.password);
+
+                setHidepass(true);
+
+                console.log('Account\n', userInfo)
+            }
+    
+            catch(err){
+                console.log('error getting user', err.message)
+            }
+    
+        }
+        getUser()
+    },[]);  
+
+    const updateUser = async () => {
+        const user = { fname, lname, username, email, password};
+
+        try{
+            const update = firebase.setUserInfo(user);
+
+        }catch(error){
+            console.log("Error @setUserInfo: ", error);
+        }
+    };
+    const showpass = async () => {
+        if(hidepass)
+        {
+            setHidepass(false);
+        }
+        else
+        {
+            setHidepass(true);
+        }
+        
+    }
 
     return(
         <View style={styles.container}>
@@ -28,13 +82,13 @@ export default AccountScreen = ({navigation}) => {
             </View>
             <View style = {{flexDirection: 'row'}}>
                 <TextInput
-                    onChangeText={onChangeFname}
+                    onChangeText={setFname}
                     value = {fname}
                     style = {styles.nameBox}
 
                 />
                 <TextInput
-                    onChangeText={onChangeLname}
+                    onChangeText={setLname}
                     value = {lname}
                     style = {styles.nameBox}
                 />
@@ -42,7 +96,7 @@ export default AccountScreen = ({navigation}) => {
             <Text style = {styles.loginText}>Username</Text>
             <TextInput
                 
-                onChangeText={onChangeUsername}
+                onChangeText={setUsername}
                 value = {username}
                 style = {styles.loginBox}
             />
@@ -51,19 +105,23 @@ export default AccountScreen = ({navigation}) => {
                 <FontAwesome5 name="check" size={15} style={{color: verify ? '#1bde31':'grey'}}/>
             </Text>
             <TextInput
-                onChangeText={onChangeEmail}
+                onChangeText={setEmail}
                 value = {email}
                 style = {styles.loginBox}
             />
-            <Text style = {styles.loginText}>Password</Text>
+            <Text style = {styles.loginText}>Password
+                {/* <TouchableOpacity style={{paddingLeft: 5}} onPress={showpass}>
+                    <FontAwesome5 name= {hidepass ? "eye-slash":"eye"} size={15} style={{color: "black"}}/>
+                </TouchableOpacity> */}
+            </Text>
             <TextInput
-                secureTextEntry={true}
+                secureTextEntry={hidepass}
                 value = {password}
                 style = {styles.loginBox}
-                onChangeText={onChangePassword}
+                onChangeText={setPassword}
             />
             <Text></Text>
-            <TouchableOpacity style = {styles.button}>
+            <TouchableOpacity style = {styles.button} onPress={updateUser}>
                 <Text style = {{color: '#E1D5E7'}}>Save Changes</Text>
             </TouchableOpacity>
         </View>
