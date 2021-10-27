@@ -19,7 +19,6 @@ const FoodScreen = () => {
             setFoods(food);
         }
         
-        
     }, []);
 
     const getBusiness = async () => {
@@ -28,9 +27,12 @@ const FoodScreen = () => {
             // Location can be 'NYC', 'CA'
             // Limit displays how many businesses you want to fetch
             const res = fetch(`${API_BASE_URL}` +
-            'categories=restaurants' +
-            '&location=WA' +
-            '&limit=5', {
+            'categories=bubbletea,acaibowls' +
+            '&latitude=' + (37.80587) +
+            '&longitude=' + (-122.42058) +
+            '&radius=4000'+ 
+            //'&location=WA' +
+            '&limit=10', {
                 method: "GET",
                 headers: {
                     "accept": "application/json",
