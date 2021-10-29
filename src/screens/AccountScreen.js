@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, TextInput, Image} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity, TextInput, Image, Platform} from 'react-native';
 import { FirebaseContext } from '../../context/FirebaseContext';
 import  {UserContext} from '../../context/UserContext';
 import { useContext } from 'react';
-import {FontAwesome5} from '@expo/vector-icons'
+import {FontAwesome5} from '@expo/vector-icons';
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
 
 export default AccountScreen = ({navigation}) => {
 
@@ -14,6 +16,7 @@ export default AccountScreen = ({navigation}) => {
     const [username, setUsername] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [profilePhoto, setProfilePhoto] = useState();
     var verify = false;
     const [hidepass, setHidepass] = useState();
 
@@ -29,6 +32,7 @@ export default AccountScreen = ({navigation}) => {
                 setUsername(userInfo.username);
                 setEmail(userInfo.email);
                 setPassword(userInfo.password);
+                setProfilePhoto(userInfo.profilePhotoUrl);
 
                 setHidepass(true);
 
@@ -63,7 +67,42 @@ export default AccountScreen = ({navigation}) => {
             setHidepass(true);
         }
         
-    }
+    };
+    const getPermission = async () =>{
+        if(Platform.OS != "web")
+        {
+            const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
+            return status;
+        }
+    };
+    const pickImage = async () => {
+        try 
+        {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 0.5,
+            });
+
+            if (!result.cancelled) 
+            {
+                setProfilePhoto(result.uri);
+            }
+        } catch (error) {
+            console.log("Error @pickImage: ", error);
+        }
+    };
+    const addProfilePhoto = async () => {
+        const status = await getPermission();
+
+        if (status !== "granted") 
+        {
+            alert("We need permission to access your camera roll.");
+            return;
+        }
+        pickImage();
+    };
 
     return(
         <View style={styles.container}>
@@ -71,10 +110,12 @@ export default AccountScreen = ({navigation}) => {
             <TouchableOpacity style={{alignSelf: 'flex-start', paddingLeft: 20}} onPress={() => navigation.navigate("Settings")}> 
                 <FontAwesome5 name="arrow-left" size={20} style={{color: '#7961c2'}}/>
             </TouchableOpacity>
-            <Image 
-                style = {styles.img}
-                source = {require('../../assets/profile-picture-placeholder.png')}
-            />
+            <TouchableOpacity onPress={(addProfilePhoto)}>
+                <Image 
+                    style = {styles.img}
+                    source = {{uri: profilePhoto}}
+                />
+            </TouchableOpacity>
             <Text style={{paddingTop:30, color: '#7961c2',}}>------------------- EDIT ACOUNT ----------------------</Text>
             <View style = {{flexDirection: 'row', paddingTop: 30}}>
                 <Text style = {styles.nameText}>First Name</Text>
@@ -109,11 +150,12 @@ export default AccountScreen = ({navigation}) => {
                 value = {email}
                 style = {styles.loginBox}
             />
-            <Text style = {styles.loginText}>Password
-                {/* <TouchableOpacity style={{paddingLeft: 5}} onPress={showpass}>
-                    <FontAwesome5 name= {hidepass ? "eye-slash":"eye"} size={15} style={{color: "black"}}/>
-                </TouchableOpacity> */}
-            </Text>
+            <View style = {{flexDirection: 'row'}}>
+            <Text style = {styles.passtext}>Password</Text>
+            <TouchableOpacity style = {styles.pass} onPress={showpass}>
+                    <FontAwesome5 name= {hidepass ? "eye":"eye-slash"} size={15} style={{color: "black"}}/>
+                </TouchableOpacity>
+            </View>
             <TextInput
                 secureTextEntry={hidepass}
                 value = {password}
@@ -183,6 +225,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         color: '#7961c2',
         fontWeight: 'bold',
+    },
+    passtext: {
+        paddingTop: 15,
+        width: 71,
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#7961c2',
+        fontWeight: 'bold'
+    },
+    pass: {
+        paddingTop: 15,
+        width: 30,
+        marginRight: 220,
+        paddingRight: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     button: {
         alignItems: 'center',
