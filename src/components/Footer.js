@@ -1,13 +1,13 @@
 import React, {useState} from 'react'
-import { View, Text, StyleSheet, Modal } from 'react-native'
+import { View, Text, StyleSheet, Modal, TouchableOpacity } from 'react-native'
 import Buttons from './Buttons'
 import { COLORS } from '../utils/constants'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+//import { TouchableOpacity } from 'react-native-gesture-handler'
 import {FontAwesome5} from '@expo/vector-icons'
 import ReviewBox from './ReviewBox'
 
 
-export default function Footer({handleChoice}) {
+export default function Footer({handleChoice, navigation}) {
 
     const [ReviewModalOpen, setReviewModalOpen] = useState(false); 
 
@@ -38,10 +38,10 @@ export default function Footer({handleChoice}) {
 
             </Modal>
 
-            <TouchableOpacity onPress={() => setReviewModalOpen(true)}>
+            <TouchableOpacity onPress={() => navigation.navigate("Info")}>
                 <View style={styles.comment}>
                     <View style={styles.buttonContainer}>
-                        <FontAwesome5 name="comment" size={30} color={COLORS.comment}/>
+                        <FontAwesome5 name="question" size={30} color={COLORS.comment}/>
                     </View>
                 </View>
             </TouchableOpacity>

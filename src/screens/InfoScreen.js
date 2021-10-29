@@ -1,12 +1,13 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import InfoBox from '../components/InfoBox'
+import {FontAwesome5} from '@expo/vector-icons' 
 
-export default function InfoScreen() {
+export default function InfoScreen({navigation}) {
     return (
         <View style={{backgroundColor: '#E1D5E7', flex: 2}} >
         <View style={{marginTop: 50, flexDirection: 'row'}}>
-            <TouchableOpacity onPress={() => setInfoModalOpen(false)}>
+            <TouchableOpacity onPress={() => navigation.navigate("Food")}>
 
             <FontAwesome5 name="minus-square" 
             size={34} 

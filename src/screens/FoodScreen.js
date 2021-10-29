@@ -6,7 +6,7 @@ import { ACTION_OFFSET, FOODCARD } from '../utils/constants';
 import {API_BASE_URL, BEARER_TOKEN} from '../../yelp_api/config';
 
 
-const FoodScreen = () => {
+const FoodScreen = ({navigation}) => {
     const [food, setFoods] = useState([]);
     
     const swipe = useRef(new Animated.ValueXY()).current;
@@ -104,9 +104,7 @@ const FoodScreen = () => {
 
     }, [removeTopCard, swipe.x]);
 
- 
-
-
+    
     return(
         <View style={styles.container}>
         {food.map( ({id, name, image_url, rating }, index) => {
@@ -125,7 +123,7 @@ const FoodScreen = () => {
 
         }).reverse()}
 
-        <Footer handleChoice={handleChoice}/>
+        <Footer handleChoice={handleChoice} navigation={navigation}/>
         </View>
 
         // <Container>

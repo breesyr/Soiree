@@ -4,7 +4,7 @@ import { ACTION_OFFSET, FOODCARD} from '../utils/constants'
 import { LinearGradient } from 'expo-linear-gradient'
 import Choice from './Choice'
 import {Ionicons} from '@expo/vector-icons'
-import InfoBox from './InfoBox'
+import ReviewBox from './ReviewBox'
 import {FontAwesome5} from '@expo/vector-icons'
 
 
@@ -86,26 +86,24 @@ export default function FoodCard({foodId, title, photo_url, stars, isFirst, swip
             <Modal visible={InfoModalOpen} animationType="slide" > 
                 <View style={{backgroundColor: '#E1D5E7', flex: 1}} >
                     <View style={{marginTop: 50, flexDirection: 'row'}}>
-                        <TouchableOpacity onPress={() => setInfoModalOpen(false)}>
-
-                        <FontAwesome5 name="minus-square" 
-                        size={34} 
-                        color="#7961c2"/>
-
+                        <TouchableOpacity style={{paddingLeft: 20}} onPress={() => setInfoModalOpen(false)}>
+                            <FontAwesome5 name="minus-square" 
+                            size={34} 
+                            color="#7961c2"/>
                         </TouchableOpacity>
                         <View style={{marginLeft: 10}}>
                             <Text style={{fontStyle: 'italic', fontSize: 20}}>close</Text>
                         </View>
                     </View>
-                    <InfoBox/>
+                    <ReviewBox/>
                 </View>
             </Modal>
             <Image source={{uri: photo_url}} style={styles.image}/>
             {/* <LinearGradient colors={['transparent', 'rgba(0,0,0,0.9)']} style={styles.gradient}/> */}
             <Text style={styles.title}>{title}</Text>
             <TouchableOpacity style={styles.buttonContainer} onPress={ () => setInfoModalOpen(true)} >
-                <Text style={styles.buttonText}> Info</Text>
-                <Ionicons name="information-circle-outline" color={'white'} size={20} style={{marginLeft: 15}}/>
+                <Text style={styles.buttonText}> Write Review</Text>
+                <FontAwesome5 name="comment-dots" color={'white'} size={20} style={{marginLeft: 15}}/>
             </TouchableOpacity>
 
             {/* {

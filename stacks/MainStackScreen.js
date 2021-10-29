@@ -7,6 +7,7 @@ import PlacesScreen from '../src/screens/PlacesScreen';
 import BookmarkScreen from '../src/screens/BookmarkScreen';
 import { FontAwesome5 } from '@expo/vector-icons';
 import SettingStackScreen from './SettingStackScreen';
+import FoodStackScreen from './FoodStackScreen';
 
 
 export default MainStackScreen = () => {
@@ -51,7 +52,7 @@ export default MainStackScreen = () => {
 
     return(
         <MainStack.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
-            <MainStack.Screen name="Foods" component={FoodScreen} ></MainStack.Screen>
+            <MainStack.Screen name="Foods" component={FoodStackScreen} ></MainStack.Screen>
             <MainStack.Screen name="Activities" component={ActivityScreen} ></MainStack.Screen>
             <MainStack.Screen name="Places" component={PlacesScreen} ></MainStack.Screen>
             <MainStack.Screen name="Bookmark" component={BookmarkScreen} ></MainStack.Screen>
