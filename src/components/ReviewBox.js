@@ -2,12 +2,27 @@ import React from 'react'
 import { View, Text, TextInput, StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { INFOBOX } from '../utils/constants'
+import { Rating , AirbnbRating} from 'react-native-ratings';
+
 
 export default function ReviewBox() {
     return (
         <View style={styles.container}>
             <View style={{padding: 10, alignItems: 'center', justifyContent: 'center'}}>
                 <Text style={{fontWeight: 'bold', fontSize: 30}}>Write a Review</Text>
+            </View>
+
+            <View style={{padding: 15}}> 
+                <AirbnbRating
+                // ratingBackgroundColor='#E1D5E7'
+                type='custom'
+                // ratingTextColor='#E1D5E7'
+                tintColor='#E1D5E7'
+                selectedColor='#7961c2'
+                size={25}
+                reviewColor='#7961c2'
+                reviewSize={20}
+                />
             </View>
 
             <View style={styles.box}>
