@@ -57,3 +57,22 @@ export const place = [
     }
 
 ]
+
+export const pictures = [
+    {
+        id: 1,
+        url: 'https://www.dixiecrystals.com/sites/default/files/styles/recipe_image_node_full/public/recipe/Boba-Tea-dixie.jpg?itok=DKUeHmrb'        
+    },
+    {
+        id: 2,
+        url: 'https://s3-media0.fl.yelpcdn.com/bphoto/cKnRP1rUKJHsouiv6kJsXQ/348s.jpg'        
+    },
+    {
+        id: 3,
+        url: 'https://s3-media0.fl.yelpcdn.com/bphoto/uzQnXczsM6IPp9onWia7wg/348s.jpg'        
+    },
+    {
+        id: 4,
+        url: 'https://s3-media0.fl.yelpcdn.com/bphoto/z2SlMZ9AJqPlDr0sxG-FHA/l.jpg'        
+    },
+]
