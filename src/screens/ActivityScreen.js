@@ -1,23 +1,61 @@
 import {View, Text, StyleSheet, Animated, PanResponder} from 'react-native';
 import React, {useRef, useEffect, useState, useCallback} from 'react';
-// import Container from '../components/Container';
-import {activities as activitiesArray} from '../../Data'
 import FoodCard from '../components/FoodCard';
 import Footer from '../components/Footer';
 import { ACTION_OFFSET, FOODCARD } from '../utils/constants';
+import {API_BASE_URL, BEARER_TOKEN} from '../../yelp_api/config';
 
 
-const ActivityScreen = () => {
-    const [activity, setActivity] = useState([])
+const ActivityScreen = ({location}) => {
+    const [activity, setActivity] = useState([]);
+    const {latitude, longitude} = location;
 
     const swipe = useRef(new Animated.ValueXY()).current;
     const tiltSign = useRef(new Animated.Value(1)).current; 
 
     useEffect( () => {
+        getBusiness();
         if (!activity.length){
-            setActivity(activitiesArray)
+            setActivity(activity)
         }
-    }, [activity.length]);
+    }, [latitude,longitude]);
+
+    const getBusiness = async () => {
+        try{
+            // Categories can be 'bars', 'restaurants', 'food'
+            // Location can be 'NYC', 'CA'
+            // Limit displays how many businesses you want to fetch
+            const res = fetch(`${API_BASE_URL}` +
+            'categories=active' +
+            '&latitude=' + (latitude) +
+            '&longitude=' + (longitude) +
+            '&radius=4000'+ 
+            //'&location=CA' +
+            '&limit=10', {
+                method: "GET",
+                headers: {
+                    "accept": "application/json",
+                    Authorization: `Bearer ${BEARER_TOKEN}`,
+                }
+            })
+            const data = (await res).json()
+            console.log('Data from ActivityScreen: ', data);
+            data.then(jsonResponse => {
+                setActivity(
+                    jsonResponse.businesses.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        image_url: item.image_url,
+                        rating: item.rating,
+                    }))
+                )
+            }).catch((err) => {
+                console.log('error from jsonResponse: ', err);
+            });
+        } catch (err) {
+            console.log('error: ' , err)
+        };
+    }
 
     const panResponder = PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -73,15 +111,15 @@ const ActivityScreen = () => {
 
     return(
         <View style={styles.container}>
-        {activity.map( ({activityId, title, photo_url, stars }, index) => {
+        {activity.map( ({id, name, image_url, rating }, index) => {
             const isFirst = index === 0;
             const dragHandlers = isFirst ? panResponder.panHandlers : {}; 
 
             return <FoodCard 
-                key={activityId} 
-                title={title} 
-                photo_url={photo_url} 
-                stars={stars} 
+                key={id} 
+                title={name} 
+                photo_url={image_url} 
+                stars={rating} 
                 isFirst={isFirst}
                 swipe={swipe}
                 tiltSign={tiltSign}

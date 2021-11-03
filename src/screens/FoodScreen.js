@@ -5,21 +5,20 @@ import Footer from '../components/Footer';
 import { ACTION_OFFSET, FOODCARD } from '../utils/constants';
 import {API_BASE_URL, BEARER_TOKEN} from '../../yelp_api/config';
 
-
-const FoodScreen = ({navigation}) => {
+const FoodScreen = ({location}) => {
     const [food, setFoods] = useState([]);
+    const {latitude, longitude} = location;
     
     const swipe = useRef(new Animated.ValueXY()).current;
     const tiltSign = useRef(new Animated.Value(1)).current; 
 
     useEffect( () => {
         getBusiness();
-        
         if (!food.length){
             setFoods(food);
         }
-        
-    }, []);
+
+    }, [latitude, longitude]);
 
     const getBusiness = async () => {
         try{
@@ -27,12 +26,13 @@ const FoodScreen = ({navigation}) => {
             // Location can be 'NYC', 'CA'
             // Limit displays how many businesses you want to fetch
             const res = fetch(`${API_BASE_URL}` +
-            'categories=bubbletea,acaibowls' +
-            '&latitude=' + (37.80587) +
-            '&longitude=' + (-122.42058) +
+            'categories=coffee' +
+            '&latitude=' + (latitude) +
+            '&longitude=' + (longitude) +
             '&radius=4000'+ 
-            //'&location=WA' +
-            '&limit=10', {
+            //'&location=CA' +
+            '&limit=10',
+                {
                 method: "GET",
                 headers: {
                     "accept": "application/json",
@@ -41,14 +41,17 @@ const FoodScreen = ({navigation}) => {
             })
             const data = (await res).json()
             data.then(jsonResponse => {
+                //console.log('data: ', data);
                 setFoods(
-                    jsonResponse.businesses.map(item => ({
+                    jsonResponse?.businesses.map(item => ({
                         id: item.id,
                         name: item.name,
                         image_url: item.image_url,
                         rating: item.rating,
                     }))
                 )
+            }).catch((err) => {
+                console.log('error from jsonResponse: ', err);
             })
         } catch (err) {
             console.log('error: ' , err)
@@ -104,7 +107,9 @@ const FoodScreen = ({navigation}) => {
 
     }, [removeTopCard, swipe.x]);
 
-    
+ 
+
+
     return(
         <View style={styles.container}>
         {food.map( ({id, name, image_url, rating }, index) => {
@@ -123,7 +128,7 @@ const FoodScreen = ({navigation}) => {
 
         }).reverse()}
 
-        <Footer handleChoice={handleChoice} navigation={navigation}/>
+        <Footer handleChoice={handleChoice}/>
         </View>
 
         // <Container>
