@@ -5,19 +5,59 @@ import {place as placeArray} from '../../Data'
 import FoodCard from '../components/FoodCard';
 import Footer from '../components/Footer';
 import { ACTION_OFFSET, FOODCARD } from '../utils/constants';
+import {API_BASE_URL, BEARER_TOKEN} from '../../yelp_api/config';
 
-
-const PlacesScreen = () => {
+const PlacesScreen = ({location}) => {
     const [places, setPlaces] = useState([])
+    const {latitude, longitude} = location;
 
     const swipe = useRef(new Animated.ValueXY()).current;
     const tiltSign = useRef(new Animated.Value(1)).current; 
 
     useEffect( () => {
+        getBusiness();
         if (!places.length){
             setPlaces(placeArray)
         }
-    }, [places.length]);
+    }, [latitude, longitude]);
+
+    const getBusiness = async () => {
+        try{
+            // Categories can be 'bars', 'restaurants', 'food'
+            // Location can be 'NYC', 'CA'
+            // Limit displays how many businesses you want to fetch
+            const res = fetch(`${API_BASE_URL}` +
+            'categories=arts' +
+            '&latitude=' + (latitude) +
+            '&longitude=' + (longitude) +
+            '&radius=4000'+ 
+            //'&location=CA' +
+            '&limit=10',
+                {
+                method: "GET",
+                headers: {
+                    "accept": "application/json",
+                    Authorization: `Bearer ${BEARER_TOKEN}`,
+                }
+            })
+            const data = (await res).json()
+            data.then(jsonResponse => {
+                //console.log('data: ', data);
+                setPlaces(
+                    jsonResponse.businesses.map(item => ({
+                        id: item.id,
+                        name: item.name,
+                        image_url: item.image_url,
+                        rating: item.rating,
+                    }))
+                )
+            }).catch((err) => {
+                console.log('error from jsonResponse: ', err);
+            })
+        } catch (err) {
+            console.log('error: ' , err)
+        }
+    }
 
     const panResponder = PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -71,15 +111,15 @@ const PlacesScreen = () => {
 
     return(
         <View style={styles.container}>
-        {places.map( ({placesId, title, photo_url, stars }, index) => {
+        {places.map( ({id, name, image_url, rating }, index) => {
             const isFirst = index === 0;
             const dragHandlers = isFirst ? panResponder.panHandlers : {}; 
 
             return <FoodCard 
-                key={placesId} 
-                title={title} 
-                photo_url={photo_url} 
-                stars={stars} 
+                key={id} 
+                title={name} 
+                photo_url={image_url} 
+                stars={rating} 
                 isFirst={isFirst}
                 swipe={swipe}
                 tiltSign={tiltSign}

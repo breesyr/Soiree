@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import { ACTION_OFFSET, FOODCARD } from '../utils/constants';
 import {API_BASE_URL, BEARER_TOKEN} from '../../yelp_api/config';
 
-const FoodScreen = ({location}) => {
+const FoodScreen = ({location, navigation}) => {
     const [food, setFoods] = useState([]);
     const {latitude, longitude} = location;
     
@@ -14,6 +14,7 @@ const FoodScreen = ({location}) => {
 
     useEffect( () => {
         getBusiness();
+        console.log('Food card length: ', food.length);
         if (!food.length){
             setFoods(food);
         }
@@ -26,7 +27,7 @@ const FoodScreen = ({location}) => {
             // Location can be 'NYC', 'CA'
             // Limit displays how many businesses you want to fetch
             const res = fetch(`${API_BASE_URL}` +
-            'categories=coffee' +
+            'categories=brunch' +
             '&latitude=' + (latitude) +
             '&longitude=' + (longitude) +
             '&radius=4000'+ 
@@ -43,7 +44,7 @@ const FoodScreen = ({location}) => {
             data.then(jsonResponse => {
                 //console.log('data: ', data);
                 setFoods(
-                    jsonResponse?.businesses.map(item => ({
+                    jsonResponse.businesses.map(item => ({
                         id: item.id,
                         name: item.name,
                         image_url: item.image_url,
@@ -128,7 +129,7 @@ const FoodScreen = ({location}) => {
 
         }).reverse()}
 
-        <Footer handleChoice={handleChoice}/>
+        <Footer handleChoice={handleChoice} navigation={navigation}/>
         </View>
 
         // <Container>
