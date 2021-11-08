@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
-import { View, Text, TouchableOpacity, Image} from 'react-native'
+import { View, Text, TouchableOpacity, Image, ScrollView} from 'react-native'
 import InfoBox from '../components/InfoBox'
 import {FontAwesome5} from '@expo/vector-icons' 
 import Carousel, { Pagination } from 'react-native-snap-carousel';
 import {pictures} from '../../Data.js'
 const {Dimensions} = require('react-native')
+import Review from '../components/Review';
 
 
 export default function InfoScreen({navigation}) {
@@ -54,7 +55,34 @@ export default function InfoScreen({navigation}) {
                     inactiveDotScale={1}
                 />
             </View>
-        <InfoBox/>
+        <View style={{flex: 1}}>
+            <ScrollView scrollEnabled={true}>
+
+                <InfoBox/>
+                <View style={{marginTop: 300}}>
+
+                    <View
+                        style={{
+                            borderBottomColor: 'black',
+                            borderBottomWidth: 2,
+                        }}
+                        />
+                        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                        <Text style={{fontWeight: 'bold', fontSize: 25, marginTop: 5 }}>Reviews</Text>
+                        </View>
+                </View>
+                <View style={{marginTop: 40}}>
+
+                    <Review/>
+                    <Review/>
+                    <Review/>
+
+                </View>
+
+            </ScrollView>
+
+        </View>
+        
 
     </View>
     )
