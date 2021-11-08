@@ -92,7 +92,7 @@ export default MainStackScreen = () => {
         <MainStack.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
             <MainStack.Screen name="Foods" children={()=><FoodScreen location={location}/>} ></MainStack.Screen>
             <MainStack.Screen name="Activities" children={()=><ActivityScreen location={location}/>} ></MainStack.Screen>
-            <MainStack.Screen name="Places" component={PlacesScreen} ></MainStack.Screen>
+            <MainStack.Screen name="Places" children={()=><PlacesScreen location={location}/>} ></MainStack.Screen>
             <MainStack.Screen name="Bookmark" component={BookmarkScreen} ></MainStack.Screen>
             <MainStack.Screen name="Settings" component={SettingStackScreen} ></MainStack.Screen>
         </MainStack.Navigator>
