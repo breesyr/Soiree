@@ -36,10 +36,22 @@ const Firebase = {
                 //photoUrl: user.profilePhoto
             });
 
+
             return { ...user, uid };
         }catch (error) {
             console.log("Error @createUser: ", error.message);
         }
+    },
+
+    sendVerification: async () => {
+        const user = Firebase.getCurrentUser();
+        user.sendEmailVerification();
+        alert('Email sent');
+    },
+
+    sendVerifcation: async (user) => {
+        user.sendEmailVerification();
+        alert('Email sent');
     },
     
     getUserInfo: async (uid) => {
