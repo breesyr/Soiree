@@ -18,8 +18,8 @@ export default Register = ({navigation}) => {
 
         try{
             const createUser = await firebase.createUser(user);
-            setUser({...createUser, isLoggedIn: true})
-
+            setUser({...createUser, isLoggedIn: true});
+            await firebase.sendVerification();
         }catch(error){
             console.log("Error @signUp: ", error);
         }
