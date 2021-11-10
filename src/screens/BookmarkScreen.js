@@ -3,8 +3,8 @@ import {SafeAreaView, StyleSheet, Text, View, Button, TextInput, FlatList, Statu
 import { NavigationContainer } from '@react-navigation/native';
 import { Animated } from 'react-native';
 
-const AVATAR_SIZE = 70;
-const SPACING = 20;
+const AVATAR_SIZE = 100;
+const SPACING = 30;
 const { height } = Dimensions.get("screen");
 
 
@@ -12,9 +12,9 @@ const { height } = Dimensions.get("screen");
 const fakeData =[
     {
         id: "1",
-        name: "PhucLong",
+        name: "Phuc Long",
         location: "12932 Main St, Garden Grove, CA 92840",
-        picture: "https://www.littlesaigonnow.com/files/logo/13553.png",
+        picture: "https://media.urbanistnetwork.com/saigoneer/article-images/2021/06/24/phuclongusa_SGNR1b.jpg",
         logo: "https://vietnamcredit.com.vn/Media/NewsPics/2020/THANG9/23-9/Phuc-Long-an-outstanding-example-of-success-in-the-tea-and-coffee-market-in-Vietnam1.jpg"
 
     },
@@ -22,7 +22,8 @@ const fakeData =[
         id: "2",
         name: "Starbucks",
         location: "11162 Garden Grove Blvd, Garden Grove, CA 92843",
-        picture: "https://d1ralsognjng37.cloudfront.net/305df057-e65a-47e6-b62c-e5d024c918ca.jpeg",
+        picture: "https://cdn.mos.cms.futurecdn.net/8tEvBrHEeMTTBt26SiniHM.jpg",
+        logo: "https://cdn.mos.cms.futurecdn.net/8tEvBrHEeMTTBt26SiniHM.jpg"
     },
     {
         id: "3",
