@@ -14,10 +14,11 @@ export default BookmarkScreenDetail = ({navigation, route}) => {
             <TouchableOpacity style={{alignSelf: 'flex-start', paddingLeft: 20}} onPress={() => navigation.navigate("Bookmarks")}> 
                 <FontAwesome5 name="arrow-left" size={20} style={{color: '#7961c2'}}/>
             </TouchableOpacity>
-            <View style = {[StyleSheet.absoluteFill, {backgroundColor: '#E1D5E7', borderRadius: 16, height: 300}]}/>
-            <Image source = {{uri: item.logo}}
-                   style = {{width: 850, height: 450, borderRadius: 30, bottom: 200, right: 10}}/> 
-            
+            <View style = {[StyleSheet.absoluteFill, {backgroundColor: '#E1D5E7', borderRadius:0.5, height: 450}]}/>
+            <Image source = {{uri: item.picture}}
+                   style = {{width:850, height: 300, bottom: 89.5, right: 8}}/> 
+            <Text style = {{fontSize: 40, fontWeight: '150', bottom: 90}}> {item.name} </Text>
+            <Text style = {{fontSize: 20, fontWeight: '100', bottom: 90}}> {item.location} </Text>
 
         </View>
     )
