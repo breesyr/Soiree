@@ -32,7 +32,7 @@ export default AccountScreen = ({navigation}) => {
                 setUsername(userInfo.username);
                 setEmail(userInfo.email);
                 setPassword(userInfo.password);
-                setProfilePhoto(userInfo.profilePhotoUrl);
+                setProfilePhoto(userInfo.photoUrl);
 
                 setHidepass(true);
 
@@ -48,7 +48,7 @@ export default AccountScreen = ({navigation}) => {
     },[]);  
 
     const updateUser = async () => {
-        const user = { fname, lname, username, email, password};
+        const user = { fname, lname, username, email, password, profilePhoto};
 
         try{
             const update = firebase.setUserInfo(user);
@@ -110,11 +110,18 @@ export default AccountScreen = ({navigation}) => {
             <TouchableOpacity style={{alignSelf: 'flex-start', paddingLeft: 20}} onPress={() => navigation.navigate("Settings")}> 
                 <FontAwesome5 name="arrow-left" size={20} style={{color: '#7961c2'}}/>
             </TouchableOpacity>
-            <TouchableOpacity onPress={(addProfilePhoto)}>
-                <Image 
-                    style = {styles.img}
-                    source = {{uri: profilePhoto}}
-                />
+            <TouchableOpacity onPress={addProfilePhoto}>
+                {profilePhoto? (
+                    <Image 
+                        style = {styles.img}
+                        source = {{uri: profilePhoto}}
+                    />
+                    ) : (
+                    <Image 
+                        style = {styles.img}
+                        source = {require('../../assets/profile-picture-placeholder.png')}
+                    />
+                )}
             </TouchableOpacity>
             <Text style={{paddingTop:30, color: '#7961c2',}}>------------------- EDIT ACOUNT ----------------------</Text>
             <View style = {{flexDirection: 'row', paddingTop: 30}}>

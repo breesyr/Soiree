@@ -11,15 +11,15 @@ import Maps from './src/screens/Maps'
 
 export default function App() {
   return (
-    // <FirebaseProvider>
-    //   <UserProvider>
-    //     <NavigationContainer>
-    //         <AppStackScreen></AppStackScreen>
-    //     </NavigationContainer>
-    //   </UserProvider>
-    // </FirebaseProvider>
+    <FirebaseProvider>
+      <UserProvider>
+        <NavigationContainer>
+            <AppStackScreen></AppStackScreen>
+        </NavigationContainer>
+      </UserProvider>
+    </FirebaseProvider>
 
-    <Maps />
+    // <Maps />
   );
 }
 

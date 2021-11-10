@@ -1,8 +1,10 @@
 import React, {useState, useContext} from 'react';
-import {StyleSheet, Text, View, Button, TextInput, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Image, TextInput, TouchableOpacity} from 'react-native';
 
 import { FirebaseContext } from '../../context/FirebaseContext';
 import {UserContext} from '../../context/UserContext';
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
 
 export default Register = ({navigation}) => {
     const [username, setUsername] = useState();
@@ -10,30 +12,82 @@ export default Register = ({navigation}) => {
     const [lastName, setLastName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [loading, setLoading] = useState(false);
+    const [profilePhoto, setProfilePhoto] = useState();
     const firebase = useContext(FirebaseContext);
     const [_, setUser] = useContext(UserContext);
 
+    // const getPermission = async () => {
+    //     if (Platform.OS !== "web") {
+    //         const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
+
+    //         return status;
+    //     }
+    // };
+
+    // const pickImage = async () => {
+    //     try {
+    //         let result = await ImagePicker.launchImageLibraryAsync({
+    //             mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    //             allowsEditing: true,
+    //             aspect: [1, 1],
+    //             quality: 0.5,
+    //         });
+
+    //         if (!result.cancelled) {
+    //             setProfilePhoto(result.uri);
+    //         }
+    //     } catch (error) {
+    //         console.log("Error @pickImage: ", error);
+    //     }
+    // };
+
+    // const addProfilePhoto = async () => {
+    //     const status = await getPermission();
+
+    //     if (status !== "granted") {
+    //         alert("We need permission to access your camera roll.");
+
+    //         return;
+    //     }
+
+    //     pickImage();
+    // };
+
     const signUp = async () => {
-        const user = { firstName, lastName, username, email, password};
+        setLoading(true);
+
+        const user = { firstName, lastName, username, email, password, profilePhoto};
 
         try{
             const createUser = await firebase.createUser(user);
             setUser({...createUser, isLoggedIn: true});
+
             await firebase.sendVerification();
+
         }catch(error){
             console.log("Error @signUp: ", error);
+        } finally {
+            setLoading(false);
         }
     };
 
     return(
         <View style = {styles.container}>
-            <Text style = {styles.logo}>
-                {/* <Image 
-                    style = {styles.img}
-                    source = {require('./turtle.png')}
-                /> */}
-                Soiree
-            </Text>
+            <Text style = {styles.logo}>Soiree</Text>
+            {/* <TouchableOpacity onPress={(addProfilePhoto)}>
+                {profilePhoto ? (
+                    <Image 
+                        style = {styles.img}
+                        source = {{uri: profilePhoto }}
+                    />
+                    ) : (
+                    <Image 
+                        style = {styles.img}
+                        source = {require('../../assets/profile-picture-placeholder.png')}
+                    />
+                )}
+            </TouchableOpacity> */}
             <View style = {{flexDirection: 'row'}}>
                 <TextInput
                     placeholder = "first name"
@@ -121,7 +175,10 @@ const styles = StyleSheet.create({
         color: 'black',
     },
     img: {
-        height: 50,
-        width: 50,
+        height: 125,
+        width: 125,
+        borderWidth:5,
+        borderColor: '#7961c2',
+        borderRadius: 60,
     },
 });
