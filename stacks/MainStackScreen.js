@@ -1,63 +1,24 @@
-import React ,{useState, useEffect}from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Ionicons} from '@expo/vector-icons';
 import FoodScreen from '../src/screens/FoodScreen';
 import ActivityScreen from '../src/screens/ActivityScreen';
 import PlacesScreen from '../src/screens/PlacesScreen';
-import BookmarkScreen from '../src/screens/BookmarkScreen';
 import { FontAwesome5 } from '@expo/vector-icons';
 import SettingStackScreen from './SettingStackScreen';
-import { Alert } from "react-native";
-import * as Location from 'expo-location';
+import BookmarkStackScreen from './BookmarkStackScreen';
+
 
 export default MainStackScreen = () => {
     const MainStack = createBottomTabNavigator();
-
     const tabBarOptions = {
         showLabel: true,
+
     };
-
-    const [locationServiceEnabled, setLocationServiceEnabled] = useState(false);
-    const [location, setLocation] = useState({});
-
-    const checkIfLocationEnabled = async () => {
-        let enabled = await Location.hasServicesEnabledAsync();
-        console.log('enabled: ', enabled);
-    
-        if (!enabled) {
-          Alert.alert(
-            'Location Service not enabled',
-            'Please enable your location services to continue',
-            [{ text: 'OK' }],
-            { cancelable: false }
-          );
-        } else {
-          setLocationServiceEnabled(enabled);
-        }
-    }
-
-    const getCurrentLocation = async () => {
-        let { status } = await Location.requestForegroundPermissionsAsync();
-	  
-		if (status !== 'granted') {
-		  Alert.alert(
-			'Permission not granted',
-			'Allow the app to use location service.',
-			[{ text: 'OK' }],
-			{ cancelable: false }
-		  );
-		}
-        let { coords } = await Location.getCurrentPositionAsync();
-        setLocation(coords);
-    }
-
-    useEffect(() => {
-        checkIfLocationEnabled();
-        getCurrentLocation();
-    }, [])
 
     const screenOptions = ({route}) => ({
         headerTransparent: true,
-        headerShown: false, 
+        headerShown: false,
         tabBarIcon: ({focused}) => {
             let iconName = 'home';
 
@@ -90,10 +51,10 @@ export default MainStackScreen = () => {
 
     return(
         <MainStack.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
-            <MainStack.Screen name="Foods" children={()=><FoodScreen location={location}/>} ></MainStack.Screen>
-            <MainStack.Screen name="Activities" children={()=><ActivityScreen location={location}/>} ></MainStack.Screen>
-            <MainStack.Screen name="Places" children={()=><PlacesScreen location={location}/>} ></MainStack.Screen>
-            <MainStack.Screen name="Bookmark" component={BookmarkScreen} ></MainStack.Screen>
+            <MainStack.Screen name="Foods" component={FoodScreen} ></MainStack.Screen>
+            <MainStack.Screen name="Activities" component={ActivityScreen} ></MainStack.Screen>
+            <MainStack.Screen name="Places" component={PlacesScreen} ></MainStack.Screen>
+            <MainStack.Screen name="Bookmark" component={BookmarkStackScreen} ></MainStack.Screen>
             <MainStack.Screen name="Settings" component={SettingStackScreen} ></MainStack.Screen>
         </MainStack.Navigator>
     );
