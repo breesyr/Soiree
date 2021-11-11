@@ -10,7 +10,8 @@ import {FontAwesome5} from '@expo/vector-icons'
 
 export default SettingsScreen = ({navigation}) => {
 
-    const [user, setUser] = useState([]); 
+    const [user, setUser] = useState([]);
+    const [profilePhotoUser, setProfilePhotoUser] = useContext(UserContext);
     const firebase = useContext(FirebaseContext);
 
     const [loggedUser, setLoggedUser] = useContext(UserContext);
@@ -57,8 +58,15 @@ export default SettingsScreen = ({navigation}) => {
     return(
         <View style={styles.container}>
             <View style={styles.innerContainer}>
-                <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
-                style={styles.image}/>
+                {/* <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
+                style={styles.image}/> */}
+                <Image
+                    source={
+                        
+                        { uri : profilePhotoUser.profilePhotoUrl }
+                    }
+                    style={styles.image}/>
+                    
                 <View>
                     {/* <Text style={styles.username}>Patrick's Settings</Text> */}
                     <Text style={styles.username}>{user?.username}'s Settings</Text>

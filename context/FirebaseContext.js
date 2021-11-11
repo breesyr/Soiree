@@ -52,7 +52,7 @@ const Firebase = {
         try {
             const photo = await Firebase.getBlob(uri);
 
-            const imageRef = firebase.storage().ref("profilePhotos").child(uid);
+            const imageRef = firebase.storage().ref("profilePhotos").child(uid); //names the image after the user id
             await imageRef.put(photo);
 
             const url = await imageRef.getDownloadURL();

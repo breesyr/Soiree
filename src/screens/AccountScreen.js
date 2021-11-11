@@ -10,6 +10,8 @@ import * as ImagePicker from 'expo-image-picker';
 export default AccountScreen = ({navigation}) => {
 
     const firebase = useContext(FirebaseContext);
+    const [user, setUser] = useState([]);
+    const [profilePhotoUser, setProfilePhotoUser] = useContext(UserContext);
 
     const [fname, setFname] = useState();
     const [lname, setLname] = useState();
@@ -88,7 +90,7 @@ export default AccountScreen = ({navigation}) => {
             if (!result.cancelled) 
             {
                 firebase.uploadProfilePhoto(result.uri);
-                //setProfilePhoto(result.uri);
+                setProfilePhoto(result.uri);
             }
         } catch (error) {
             console.log("Error @pickImage: ", error);
@@ -116,14 +118,15 @@ export default AccountScreen = ({navigation}) => {
                 {profilePhoto? (
                     <Image 
                         style = {styles.img}
-                        source = {{uri: profilePhoto}}
+                        source = {{uri: profilePhotoUser.profilePhotoUrl}}
                     />
-                    ) : (
-                    <Image 
-                        style = {styles.img}
-                        source = {require('../../assets/profile-picture-placeholder.png')}
-                    />
-                )}
+                     ) : (
+                     <Image 
+                         style = {styles.img}
+                         source = {require('../../assets/profile-picture-placeholder.png')}
+                     />
+                )
+                }
             </TouchableOpacity>
             <Text style={{paddingTop:30, color: '#7961c2',}}>------------------- EDIT ACOUNT ----------------------</Text>
             <View style = {{flexDirection: 'row', paddingTop: 30}}>
