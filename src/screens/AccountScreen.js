@@ -87,11 +87,13 @@ export default AccountScreen = ({navigation}) => {
 
             if (!result.cancelled) 
             {
-                setProfilePhoto(result.uri);
+                firebase.uploadProfilePhoto(result.uri);
+                //setProfilePhoto(result.uri);
             }
         } catch (error) {
             console.log("Error @pickImage: ", error);
         }
+        console.log("picking image... ", result.uri)
     };
     const addProfilePhoto = async () => {
         const status = await getPermission();
