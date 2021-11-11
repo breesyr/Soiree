@@ -105,17 +105,20 @@ export default Register = ({navigation}) => {
                 placeholder = "username"
                 style = {styles.loginBox}
                 onChangeText={(username) => setUsername(username.trim())}
+                autoCapitalize = 'none'
             />
             <TextInput
                 placeholder = "email"
                 style = {styles.loginBox}
                 onChangeText={(email) => setEmail(email.trim())}
+                autoCapitalize = 'none'
             />
             <TextInput
                 secureTextEntry={true}
                 placeholder = "passsword"
                 style = {styles.loginBox}
                 onChangeText={(password) => setPassword(password.trim())}
+                autoCapitalize = 'none'
             />
             {/* <TextInput
                 placeholder = " confirm passsword"
