@@ -2,26 +2,26 @@ import React from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import Star from 'react-native-star-view'
 
-export default function Review() {
+export default function Review({review}) {
     return (
         <View style={styles.review}>
             <View style={styles.reviewWrapper}>
                 <View style={styles.reviewTop}>
                     <View style={styles.reviewTopLeft}>
                         <Image 
-                        source={{uri: 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg'}}
+                        source={{uri: review.url}}
                         style={styles.reviewImage}/>
 
-                        <Text style={{fontSize: 15, marginLeft: 10, fontWeight: '500'}}>Jane Doe</Text>
+                        <Text style={{fontSize: 15, marginLeft: 10, fontWeight: '500'}}>{review.username}</Text>
                     </View>
                 </View>
                 <View style={styles.reviewCenter}>
-                    <Star score={4} style={{width: 100, height: 20}}/>
+                    <Star score={review.rating} style={{width: 100, height: 20}}/>
 
                 </View>
 
                 <View style={styles.reviewBottom}>
-                    <Text >Here is a sample review </Text>
+                    <Text >{review.comment}</Text>
 
                 </View>
 
