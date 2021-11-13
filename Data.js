@@ -76,3 +76,35 @@ export const pictures = [
         url: 'https://s3-media0.fl.yelpcdn.com/bphoto/z2SlMZ9AJqPlDr0sxG-FHA/l.jpg'        
     },
 ]
+
+export const reviews = [
+
+    {
+        id: 1,
+        username: 'Squidward',
+        rating: 5,
+        comment: 'I really like the food. I recommend!',
+        url: 'https://static.wikia.nocookie.net/spongebob/images/9/96/The_Two_Faces_of_Squidward_174.png/revision/latest?cb=20200923005328'
+    },
+    {
+        id: 2,
+        username: 'Spongebob',
+        rating: 4,
+        comment: 'I came here with my friend, we really liked the food',
+        url: 'https://i.pinimg.com/550x/54/ce/4f/54ce4f9a4d20898ebdfcef56e380c9a3.jpg'
+    },
+    {
+        id: 3,
+        username: 'Mr. Krabs',
+        rating: 2,
+        comment: 'Too expensive',
+        url: 'https://filmdaily.co/wp-content/uploads/2021/01/mrkrabs-lede.jpg'
+    },
+    {
+        id: 4,
+        username: 'Patrick Star',
+        rating: 4,
+        comment: 'Food was very yummy ',
+        url: 'http://reactionimage.org/img/gallery/806429673.jpg'
+    }
+]
