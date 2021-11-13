@@ -6,6 +6,7 @@ import Carousel, { Pagination } from 'react-native-snap-carousel';
 import {pictures} from '../../Data.js'
 const {Dimensions} = require('react-native')
 import Review from '../components/Review';
+import {reviews} from '../../Data.js'
 
 
 export default function InfoScreen({navigation}) {
@@ -59,7 +60,7 @@ export default function InfoScreen({navigation}) {
             <ScrollView scrollEnabled={true}>
 
                 <InfoBox/>
-                <View style={{marginTop: 300}}>
+                <View style={{marginTop: 350}}>
 
                     <View
                         style={{
@@ -72,11 +73,11 @@ export default function InfoScreen({navigation}) {
                         </View>
                 </View>
                 <View style={{marginTop: 40}}>
+                    {reviews.map(r =>(
+                        <Review key={r.id} review={r}/>
 
-                    <Review/>
-                    <Review/>
-                    <Review/>
-
+                    ))}
+                    
                 </View>
 
             </ScrollView>
