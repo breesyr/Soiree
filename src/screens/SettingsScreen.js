@@ -10,8 +10,7 @@ import {FontAwesome5} from '@expo/vector-icons'
 
 export default SettingsScreen = ({navigation}) => {
 
-    const [user, setUser] = useState([]);
-    const [profilePhotoUser, setProfilePhotoUser] = useContext(UserContext);
+    const [user, setUser] = useState([]); 
     const firebase = useContext(FirebaseContext);
 
     const [loggedUser, setLoggedUser] = useContext(UserContext);
@@ -34,7 +33,7 @@ export default SettingsScreen = ({navigation}) => {
                 const userInfo = await firebase.getUserInfo(uid);    
                 setUser(userInfo);
 
-                console.log('Settings\n', userInfo)
+                console.log(user)
             }
     
             catch(err){
@@ -58,15 +57,8 @@ export default SettingsScreen = ({navigation}) => {
     return(
         <View style={styles.container}>
             <View style={styles.innerContainer}>
-                {/* <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
-                style={styles.image}/> */}
-                <Image
-                    source={
-                        
-                        { uri : profilePhotoUser.profilePhotoUrl }
-                    }
-                    style={styles.image}/>
-                    
+                <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
+                style={styles.image}/>
                 <View>
                     {/* <Text style={styles.username}>Patrick's Settings</Text> */}
                     <Text style={styles.username}>{user?.username}'s Settings</Text>
@@ -140,29 +132,30 @@ export default SettingsScreen = ({navigation}) => {
                         <Text style={{color: '#808080'}}>PREFERENCES</Text>
                     </View>
 
-                    <TouchableOpacity style={styles.button}>
-                        <FontAwesome5 name="apple-alt" size={20} style={{marginRight: 10}} color="#7961c2"/> 
-                        <Text style={styles.buttonText}>View preferences</Text>
-                        <View style={{ marginLeft: 'auto'}}> 
-                            <FontAwesome5 name="arrow-right" size={20} />
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.button}>
-                        <FontAwesome5 name="cookie-bite" size={20} style={{marginRight: 10}} color="#7961c2"/> 
-                        <Text style={styles.buttonText}>Edit preferences</Text>
-                        <View style={{ marginLeft: 'auto'}}> 
-                            <FontAwesome5 name="arrow-right" size={20} />
-                        </View>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={styles.button}>
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Preference")}>
                         <FontAwesome5 name="utensils" size={20} style={{marginRight: 10}} color="#7961c2"/> 
-                        <Text style={styles.buttonText}>Reset preferences</Text>
+                        <Text style={styles.buttonText}>Food preferences</Text>
                         <View style={{ marginLeft: 'auto'}}> 
                             <FontAwesome5 name="arrow-right" size={20} />
                         </View>
                     </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Preference")}>
+                        <FontAwesome5 name="walking" size={20} style={{marginRight: 10}} color="#7961c2"/> 
+                        <Text style={styles.buttonText}>Activities preferences</Text>
+                        <View style={{ marginLeft: 'auto'}}> 
+                            <FontAwesome5 name="arrow-right" size={20} />
+                        </View>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("Preference")}>
+                        <FontAwesome5 name="map-marked" size={20} style={{marginRight: 10}} color="#7961c2"/> 
+                        <Text style={styles.buttonText}>Places preferences</Text>
+                        <View style={{ marginLeft: 'auto'}}> 
+                            <FontAwesome5 name="arrow-right" size={20} />
+                        </View>
+                    </TouchableOpacity>
+
 
                     <View style={{marginBottom: 10}}>
                         <Text style={{color: '#808080'}}>NOTIFICATIONS</Text>
