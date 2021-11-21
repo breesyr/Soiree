@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Animated, PanResponder} from 'react-native';
+import {View, Text, StyleSheet, Animated, PanResponder, ActivityIndicator} from 'react-native';
 import React, {useRef, useEffect, useState, useCallback} from 'react';
 import FoodCard from '../components/FoodCard';
 import Footer from '../components/Footer';
@@ -58,6 +58,7 @@ const FoodScreen = ({location, navigation}) => {
             console.log('error: ' , err)
         }
     }
+    
 
     const panResponder = PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -113,23 +114,29 @@ const FoodScreen = ({location, navigation}) => {
 
     return(
         <View style={styles.container}>
-        {food.map( ({id, name, image_url, rating }, index) => {
-            const isFirst = index === 0;
-            const dragHandlers = isFirst ? panResponder.panHandlers : {}; 
+        
+            {food.map( ({id, name, image_url, rating }, index) => {
+                const isFirst = index === 0;
+                const dragHandlers = isFirst ? panResponder.panHandlers : {}; 
 
-            return <FoodCard 
-                key={id} 
-                title={name} 
-                photo_url={image_url} 
-                stars={rating} 
-                isFirst={isFirst}
-                swipe={swipe}
-                tiltSign={tiltSign}
-                 {...dragHandlers}/>
-
-        }).reverse()}
+                return <FoodCard 
+                    key={id} 
+                    title={name} 
+                    photo_url={image_url} 
+                    stars={rating} 
+                    isFirst={isFirst}
+                    swipe={swipe}
+                    tiltSign={tiltSign}
+                    {...dragHandlers}/>
+                
+            }).reverse()}
 
         <Footer handleChoice={handleChoice} navigation={navigation}/>
+
+        <View style={{justifyContent: "center", flex: 1}}>
+            <ActivityIndicator size="large" color="blue"/>
+        </View>
+   
         </View>
 
         // <Container>
