@@ -5,8 +5,9 @@ import Footer from '../components/Footer';
 import { ACTION_OFFSET, FOODCARD } from '../utils/constants';
 import {API_BASE_URL, BEARER_TOKEN} from '../../yelp_api/config';
 
-const FoodScreen = ({location, navigation}) => {
+const FoodScreen = ({navigation, location}) => {
     const [food, setFoods] = useState([]);
+    const [offset, setOffset] = useState(0);
     const {latitude, longitude} = location;
     
     const swipe = useRef(new Animated.ValueXY()).current;
@@ -14,25 +15,33 @@ const FoodScreen = ({location, navigation}) => {
 
     useEffect( () => {
         getBusiness();
-        console.log('Food card length: ', food.length);
-        if (!food.length){
-            setFoods(food);
-        }
+        console.log('Food from 1st useEFfect: ', food);
 
     }, [latitude, longitude]);
+
+    useEffect(() => {
+        console.log('Food length: ', food.length)
+        console.log('Offset before incrementing: ', offset);
+        if (!food.length){
+            //setOffset(offset + 10);
+            console.log('Offset after incrementing: ', offset);
+            getBusiness();
+        }
+    }, [food.length]);
 
     const getBusiness = async () => {
         try{
             // Categories can be 'bars', 'restaurants', 'food'
             // Location can be 'NYC', 'CA'
-            // Limit displays how many businesses you want to fetch
+            // Limit displaysxs how many businesses you want to fetch
             const res = fetch(`${API_BASE_URL}` +
             'categories=brunch' +
             '&latitude=' + (latitude) +
             '&longitude=' + (longitude) +
             '&radius=4000'+ 
             //'&location=CA' +
-            '&limit=10',
+            '&limit=10' +
+            '&offset=' + (offset),
                 {
                 method: "GET",
                 headers: {
@@ -42,7 +51,6 @@ const FoodScreen = ({location, navigation}) => {
             })
             const data = (await res).json()
             data.then(jsonResponse => {
-                //console.log('data: ', data);
                 setFoods(
                     jsonResponse.businesses.map(item => ({
                         id: item.id,
@@ -58,7 +66,6 @@ const FoodScreen = ({location, navigation}) => {
             console.log('error: ' , err)
         }
     }
-    
 
     const panResponder = PanResponder.create({
         onMoveShouldSetPanResponder: () => true,
@@ -106,7 +113,6 @@ const FoodScreen = ({location, navigation}) => {
             duration: 400,
             useNativeDriver: true,
         }).start(removeTopCard);
-
     }, [removeTopCard, swipe.x]);
 
  
@@ -114,29 +120,24 @@ const FoodScreen = ({location, navigation}) => {
 
     return(
         <View style={styles.container}>
-        
-            {food.map( ({id, name, image_url, rating }, index) => {
-                const isFirst = index === 0;
-                const dragHandlers = isFirst ? panResponder.panHandlers : {}; 
+        {food.map( ({id, name, image_url, rating }, index) => {
+            const isFirst = index === 0;
+            const dragHandlers = isFirst ? panResponder.panHandlers : {}; 
 
-                return <FoodCard 
-                    key={id} 
-                    title={name} 
-                    photo_url={image_url} 
-                    stars={rating} 
-                    isFirst={isFirst}
-                    swipe={swipe}
-                    tiltSign={tiltSign}
-                    {...dragHandlers}/>
-                
-            }).reverse()}
+            return <FoodCard 
+                key={id} 
+                title={name} 
+                photo_url={image_url} 
+                stars={rating} 
+                isFirst={isFirst}
+                swipe={swipe}
+                tiltSign={tiltSign}
+                 {...dragHandlers}/>
+
+        }).reverse()}
 
         <Footer handleChoice={handleChoice} navigation={navigation}/>
 
-        <View style={{justifyContent: "center", flex: 1}}>
-            <ActivityIndicator size="large" color="blue"/>
-        </View>
-   
         </View>
 
         // <Container>
@@ -147,6 +148,10 @@ const FoodScreen = ({location, navigation}) => {
         //     </View>
         // </View>
         // </Container>
+        
+        //<View style={{justifyContent: "center", flex: 1}}>
+            //<ActivityIndicator size="large" color="blue"/>
+        //</View>
         )
 
 }
