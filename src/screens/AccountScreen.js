@@ -34,7 +34,11 @@ export default AccountScreen = ({navigation}) => {
                 setUsername(userInfo.username);
                 setEmail(userInfo.email);
                 setPassword(userInfo.password);
-                setProfilePhoto(userInfo.photoUrl);
+
+                if(userInfo.profilePhotoUrl)
+                    setProfilePhoto(userInfo.profilePhotoUrl);
+                else
+                    setProfilePhoto(profilePhotoUser.profilePhotoUrl);
 
                 setHidepass(true);
 
@@ -59,6 +63,7 @@ export default AccountScreen = ({navigation}) => {
             console.log("Error @setUserInfo: ", error);
         }
     };
+
     const showpass = async () => {
         if(hidepass)
         {
@@ -70,6 +75,7 @@ export default AccountScreen = ({navigation}) => {
         }
         
     };
+
     const getPermission = async () =>{
         if(Platform.OS != "web")
         {
@@ -77,6 +83,7 @@ export default AccountScreen = ({navigation}) => {
             return status;
         }
     };
+
     const pickImage = async () => {
         try 
         {
@@ -97,6 +104,7 @@ export default AccountScreen = ({navigation}) => {
         }
         console.log("picking image... ", result.uri)
     };
+    
     const addProfilePhoto = async () => {
         const status = await getPermission();
 
@@ -118,14 +126,14 @@ export default AccountScreen = ({navigation}) => {
                 {profilePhoto? (
                     <Image 
                         style = {styles.img}
-                        source = {{uri: profilePhotoUser.profilePhotoUrl}}
+                        source = {{uri: profilePhoto}}
                     />
                      ) : (
                      <Image 
                          style = {styles.img}
                          source = {require('../../assets/profile-picture-placeholder.png')}
                      />
-                )
+                    )
                 }
             </TouchableOpacity>
             <Text style={{paddingTop:30, color: '#7961c2',}}>------------------- EDIT ACOUNT ----------------------</Text>

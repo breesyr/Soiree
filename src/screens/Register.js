@@ -17,43 +17,6 @@ export default Register = ({navigation}) => {
     const firebase = useContext(FirebaseContext);
     const [_, setUser] = useContext(UserContext);
 
-    // const getPermission = async () => {
-    //     if (Platform.OS !== "web") {
-    //         const { status } = await Permissions.askAsync(Permissions.MEDIA_LIBRARY);
-
-    //         return status;
-    //     }
-    // };
-
-    // const pickImage = async () => {
-    //     try {
-    //         let result = await ImagePicker.launchImageLibraryAsync({
-    //             mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    //             allowsEditing: true,
-    //             aspect: [1, 1],
-    //             quality: 0.5,
-    //         });
-
-    //         if (!result.cancelled) {
-    //             setProfilePhoto(result.uri);
-    //         }
-    //     } catch (error) {
-    //         console.log("Error @pickImage: ", error);
-    //     }
-    // };
-
-    // const addProfilePhoto = async () => {
-    //     const status = await getPermission();
-
-    //     if (status !== "granted") {
-    //         alert("We need permission to access your camera roll.");
-
-    //         return;
-    //     }
-
-    //     pickImage();
-    // };
-
     const signUp = async () => {
         setLoading(true);
 
@@ -75,19 +38,6 @@ export default Register = ({navigation}) => {
     return(
         <View style = {styles.container}>
             <Text style = {styles.logo}>Soiree</Text>
-            {/* <TouchableOpacity onPress={(addProfilePhoto)}>
-                {profilePhoto ? (
-                    <Image 
-                        style = {styles.img}
-                        source = {{uri: profilePhoto }}
-                    />
-                    ) : (
-                    <Image 
-                        style = {styles.img}
-                        source = {require('../../assets/profile-picture-placeholder.png')}
-                    />
-                )}
-            </TouchableOpacity> */}
             <View style = {{flexDirection: 'row'}}>
                 <TextInput
                     placeholder = "first name"

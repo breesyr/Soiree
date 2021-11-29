@@ -69,19 +69,6 @@ const Firebase = {
 
     },
 
-    // uploadPhoto: async (imageUri) => {
-    //     const uploadUri = imageUri;
-    //     let filename = uploadUri.substring(uploadUri.lastIndexOf('/') + 1);
-
-    //     try{
-    //         await firebase.storage().ref(filename).put(uploadUri)
-    //     }catch(error){
-    //         console.log("Error @uploadPhoto: ", error);
-    //     }
-    //     console.log("image uri: ", imageUri)
-    //     console.log("file name: ", filename)
-    // },
-
     getBlob: async (uri) => {
         return await new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
@@ -126,22 +113,22 @@ const Firebase = {
         try{
             const uid = Firebase.getCurrentUser().uid;
 
-            await db.collection("users").doc(uid).set({
+            await db.collection("users").doc(uid).update({
                 firstName: user.fname,
                 lastName: user.lname,
                 displayName: user.username,
                 username: user.username,
                 email: user.email,
                 password: user.password,
-                //profilePhotoUrl,
-                //photoUrl: user.profilePhoto
+                // profilePhotoUrl,
+                // photoUrl: user.profilePhoto
             });
             
-            if (user.profilePhoto) {
-                //profilePhotoUrl = await Firebase.uploadProfilePhoto(user.profilePhoto);
-            }
+            // if (user.profilePhoto) {
+            //     profilePhotoUrl = await Firebase.uploadProfilePhoto(user.profilePhoto);
+            // }
 
-            return { ...user, profilePhotoUrl, uid };
+            // return { ...user, profilePhotoUrl, uid };
         }
         catch(error) {
             console.log("Error @setUserInfo: ", error);

@@ -10,7 +10,8 @@ import {FontAwesome5} from '@expo/vector-icons'
 
 export default SettingsScreen = ({navigation}) => {
 
-    const [user, setUser] = useState([]); 
+    const [user, setUser] = useState([]);
+    const [profilePhotoUser, setProfilePhotoUser] = useContext(UserContext);
     const firebase = useContext(FirebaseContext);
 
     const [loggedUser, setLoggedUser] = useContext(UserContext);
@@ -33,7 +34,7 @@ export default SettingsScreen = ({navigation}) => {
                 const userInfo = await firebase.getUserInfo(uid);    
                 setUser(userInfo);
 
-                console.log(user)
+                console.log('Settings\n', userInfo)
             }
     
             catch(err){
@@ -42,7 +43,12 @@ export default SettingsScreen = ({navigation}) => {
     
         }
         getUserASAP()
+        console.log('calling getUserASAP')
     },[]);
+
+    useEffect(() =>{
+        user
+    },[user]);
 
 
     const onPress = async () => {
@@ -57,8 +63,21 @@ export default SettingsScreen = ({navigation}) => {
     return(
         <View style={styles.container}>
             <View style={styles.innerContainer}>
-                <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
-                style={styles.image}/>
+                {/* <Image source={{uri: "https://pbs.twimg.com/media/EfJCviuVAAANPh0.jpg"}}
+                style={styles.image}/> */}
+                {user.profilePhotoUrl? (
+                    <Image 
+                        style = {styles.image}
+                        source = {{uri: user.profilePhotoUrl}}
+                    />
+                     ) : (
+                     <Image 
+                         style = {styles.image}
+                         source = {require('../../assets/profile-picture-placeholder.png')}
+                     />
+                    )
+                }
+                    
                 <View>
                     {/* <Text style={styles.username}>Patrick's Settings</Text> */}
                     <Text style={styles.username}>{user?.username}'s Settings</Text>
@@ -94,7 +113,7 @@ export default SettingsScreen = ({navigation}) => {
                             </View>
 
                             <View >
-                                <Text style={{fontStyle: 'italic'}}>{user?.firstName}</Text>
+                                <Text style={{fontStyle: 'italic'}}>{user.firstName}</Text>
                             </View>
                         </View>
 
@@ -104,7 +123,7 @@ export default SettingsScreen = ({navigation}) => {
                             </View>
 
                             <View>
-                                <Text style={{fontStyle: 'italic'}}>{user?.lastName} </Text>
+                                <Text style={{fontStyle: 'italic'}}>{user.lastName} </Text>
                             </View>
                         </View>
 
@@ -114,7 +133,7 @@ export default SettingsScreen = ({navigation}) => {
                             </View>
 
                             <View>
-                                <Text style={{fontStyle: 'italic'}}>{user?.email}</Text>
+                                <Text style={{fontStyle: 'italic'}}>{user.email}</Text>
                             </View>
                         </View>
 
@@ -155,7 +174,6 @@ export default SettingsScreen = ({navigation}) => {
                             <FontAwesome5 name="arrow-right" size={20} />
                         </View>
                     </TouchableOpacity>
-
 
                     <View style={{marginBottom: 10}}>
                         <Text style={{color: '#808080'}}>NOTIFICATIONS</Text>
@@ -245,7 +263,9 @@ const styles = StyleSheet.create({
         top: 25,
         height: 150,
         width: 150,
-        borderRadius: 50,
+        borderRadius: 70,
+        borderWidth:5,
+        borderColor: '#7961c2',
         marginBottom: 50,
         marginRight: 15
     },
