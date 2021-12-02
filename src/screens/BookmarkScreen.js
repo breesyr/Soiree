@@ -3,8 +3,8 @@ import {SafeAreaView, StyleSheet, Text, View, Button, TextInput, FlatList, Statu
 import { NavigationContainer } from '@react-navigation/native';
 import { Animated } from 'react-native';
 
-const AVATAR_SIZE = 100;
-const SPACING = 30;
+const AVATAR_SIZE = 80;
+const SPACING = 20;
 const { height } = Dimensions.get("screen");
 
 
@@ -15,21 +15,21 @@ const fakeData =[
         name: "Phuc Long",
         location: "12932 Main St, Garden Grove, CA 92840",
         picture: "https://media.urbanistnetwork.com/saigoneer/article-images/2021/06/24/phuclongusa_SGNR1b.jpg",
-        logo: "https://vietnamcredit.com.vn/Media/NewsPics/2020/THANG9/23-9/Phuc-Long-an-outstanding-example-of-success-in-the-tea-and-coffee-market-in-Vietnam1.jpg"
-
+        website: 'https://www.phuclongusa.com/shop/'
     },
     {
         id: "2",
         name: "Starbucks",
         location: "11162 Garden Grove Blvd, Garden Grove, CA 92843",
         picture: "https://cdn.mos.cms.futurecdn.net/8tEvBrHEeMTTBt26SiniHM.jpg",
-        logo: "https://cdn.mos.cms.futurecdn.net/8tEvBrHEeMTTBt26SiniHM.jpg"
+        website: 'https://www.starbucks.com/'
     },
     {
         id: "3",
         name: "7 Leaves",
         location: "13481 Euclid St B, Garden Grove, CA 92843",
         picture: "https://7leavescafe.com/wp-content/uploads/drink-1.jpg",
+        website: 'https://7leavescafe.com/'
     },
     {
         id: "4",
@@ -138,7 +138,7 @@ const Item = ({title, picture,address, logo}) => (
                     </Image>
                     <View>
                             <Text style = {{fontSize: 22, fontWeight:'700'}}>{title} </Text>   
-                            <Text style = {{fontSize: 18, opacity: .7}}>{address} </Text>   
+                            <Text style = {{fontSize: 18, opacity: .7, flexDirection: 'row', width: 280}}>{address} </Text>   
                     </View>
             </View>
         
@@ -232,5 +232,7 @@ const styles = StyleSheet.create({
     },
     address:{
         fontSize: 20,
+        flex: 0.8, 
+        flexShrink: 1
     },
 });
