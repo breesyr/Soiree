@@ -57,9 +57,116 @@ export default function InfoScreen({navigation}) {
                 />
             </View>
         <View style={{flex: 1}}>
+            
+
             <ScrollView scrollEnabled={true}>
 
-                <InfoBox/>
+                <View style={{display: 'flex', flexDirection: 'row', marginBottom: 15}}>
+                    <View style={{paddingLeft: 20}}>
+                        <Text style={{fontWeight: 'bold'}}>Location:</Text>
+                        
+                    </View>
+                    <View style={{marginLeft: 10}}>
+                        <Text style={{fontStyle: 'italic'}}>11823 South St Cerritos, CA 90703</Text>
+
+                    </View>
+                </View>
+
+                <View style={{display: 'flex', flexDirection: 'row', marginBottom: 15}}>
+                    <View style={{paddingLeft: 20}}>
+                        <Text style={{fontWeight: 'bold'}}>Phone:</Text>
+                        
+                    </View>
+                    <View style={{marginLeft: 10}}>
+                        <Text style={{fontStyle: 'italic'}}>+1</Text>
+
+                    </View>
+                </View>
+                <View style={{display: 'flex', flexDirection: 'row', marginBottom: 15}}>
+                    <View style={{paddingLeft: 20}}>
+                        <Text style={{fontWeight: 'bold'}}>Price:</Text>
+                        
+                    </View>
+                    <View style={{marginLeft: 10}}>
+                        <Text style={{fontStyle: 'italic'}}>$$</Text>
+
+                    </View>
+                </View>
+
+                {/* This is where the schedule starts  */}
+                <View style={{alignItems: 'center'}}>
+                    <Text 
+                    style={{fontWeight: 'bold',  fontSize: 25, textDecorationLine: 'underline'}}>
+                        Schedule</Text>
+
+                    <View style={{display: 'flex', flexDirection: 'row', marginTop: 15}}>
+                        <View style={{marginRight: 20}}>
+                            <Text style={{color: "#9500B3"}}>Sun</Text>
+                        </View>
+                        <View>
+                            <Text style={{fontStyle: 'italic', color: "#9500B3"}}>0:00AM - 0:00PM</Text>
+
+                        </View>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row', marginTop: 15}}>
+                        <View style={{marginRight: 20}}>
+                            <Text style={{color: "#9500B3"}}>Mon</Text>
+                        </View>
+                        <View>
+                            <Text style={{fontStyle: 'italic', color: "#9500B3"}}>0:00AM - 0:00PM</Text>
+
+                        </View>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row', marginTop: 15}}>
+                        <View style={{marginRight: 20}}>
+                            <Text style={{color: "#9500B3"}}>Tue</Text>
+                        </View>
+                        <View>
+                            <Text style={{fontStyle: 'italic', color: "#9500B3"}}>0:00AM - 0:00PM</Text>
+
+                        </View>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row', marginTop: 15}}>
+                        <View style={{marginRight: 20}}>
+                            <Text style={{color: "#9500B3"}}>Wed</Text>
+                        </View>
+                        <View>
+                            <Text style={{fontStyle: 'italic', color: "#9500B3"}}>0:00AM - 0:00PM</Text>
+
+                        </View>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row', marginTop: 15}}>
+                        <View style={{marginRight: 20}}>
+                            <Text style={{color: "#9500B3"}}>Thu</Text>
+                        </View>
+                        <View>
+                            <Text style={{fontStyle: 'italic', color: "#9500B3"}}>0:00AM - 0:00PM</Text>
+
+                        </View>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row', marginTop: 15}}>
+                        <View style={{marginRight: 20}}>
+                            <Text style={{color: "#9500B3"}}>Fri</Text>
+                        </View>
+                        <View>
+                            <Text style={{fontStyle: 'italic', color: "#9500B3"}}>0:00AM - 0:00PM</Text>
+
+                        </View>
+                    </View>
+                    <View style={{display: 'flex', flexDirection: 'row', marginTop: 15}}>
+                        <View style={{marginRight: 20}}>
+                            <Text style={{color: "#9500B3"}}>Sat</Text>
+                        </View>
+                        <View>
+                            <Text style={{fontStyle: 'italic', color: "#9500B3"}}>0:00AM - 0:00PM</Text>
+
+                        </View>
+                    </View>
+
+                </View>
+
+
+                    {/* This is the border  */}
                 <View style={{marginTop: 350}}>
 
                     <View
@@ -68,6 +175,8 @@ export default function InfoScreen({navigation}) {
                             borderBottomWidth: 2,
                         }}
                         />
+
+                        {/* This is where the reviews start  */}
                         <View style={{justifyContent: 'center', alignItems: 'center'}}>
                         <Text style={{fontWeight: 'bold', fontSize: 25, marginTop: 5 }}>Reviews</Text>
                         </View>
