@@ -106,5 +106,12 @@ export const reviews = [
         rating: 4,
         comment: 'Food was very yummy ',
         url: 'http://reactionimage.org/img/gallery/806429673.jpg'
+    },
+    {
+        id: 5,
+        username: 'Karen',
+        rating: 3,
+        comment: '01100110 01101111 01101111 01100100 00100000 01110111 01100001 01110011 00100000 01100100 01100101 01100011 01100101 01101110 01110100 00100000 ',
+        url: 'https://static.wikia.nocookie.net/spongebob/images/1/18/Karen-blue-form-stock-art.png/revision/latest?cb=20200317150606'
     }
 ]
